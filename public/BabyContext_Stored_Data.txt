@@ -1,0 +1,42 @@
+Stored Data Naming Convention in BabyContext.jsx
+
+### Baby Information (BabyInfoBio.jsx):
+- **Baby Name**: babyData.babyName
+- **Baby MRN**: babyData.babyMRN
+- **Gender**: babyData.gender
+- **Date of Birth (DOB)**: babyData.dob
+- **Current Date (CD)**: babyData.currentDate
+- **Birth Weight**: babyData.birthWeight
+- **Gestational Age (GA) Weeks**: babyData.gaWeeks
+- **Gestational Age (GA) Days**: babyData.gaDays
+- **Days of Life (DOL)**: babyData.dol
+- **Corrected Gestational Age (CGA)**: babyData.cga
+
+### Biometric Data:
+- **Face Photo**: face_photo_"Entered Baby Name"_"Entered MRN"
+- **Foot Print**: foot_print_"Entered Baby Name"_"Entered MRN"
+- **Retina Print**: retina_print_"Entered Baby Name"_"Entered MRN"
+
+### Mother Information (MotherInfoBio.jsx):
+- **Mother Name**: babyData.motherName
+- **Mother MRN**: babyData.motherMRN
+- **Mother Finger Print**: finger_print_"Entered Baby Name"_"Entered MRN"
+- **Mother Personal ID**: personal_id_"Entered Baby Name"_"Entered MRN"
+
+### Expressed Breast Milk (EBM) Delivery (EBMDeliveryBio.jsx):
+- **Bottle Order**: babyData.ebmBottleOrder
+- **Unique Bottle ID**: babyData.ebmUniqueID
+- **Date of Expression**: babyData.ebmExpressionDate
+- **Date of Delivery**: babyData.ebmDeliveryDate
+- **Volume (ml)**: babyData.ebmVolume
+
+### Expressed Breast Milk (EBM) Usage (EBMUseBio.jsx):
+- **Number of Bottles Used**: babyData.ebmBottlesUsed
+- **Total Volume Used (ml)**: babyData.ebmTotalUsed
+- **Total Volume Discarded (ml)**: babyData.ebmTotalDiscarded
+- **Remaining Viable Bottles**: babyData.ebmViableBottles
+
+### QR Code:
+- **QR Code Value**: babyData.qrCodeValue
+- **QR Code File Name**: qr_code_"Entered Baby Name"_"Entered Baby MRN"
+

@@ -1,0 +1,43 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+.main-layout {
+  display: flex;
+  flex: 1;
+  height: auto;
+}
+
+.left-column {
+  width: 200px;
+  background-color: #ecf0f1;
+  color: white;
+  padding: 10px;
+  overflow-y: auto;
+  border: none;
+  height: auto;
+}
+
+.center-column {
+  flex: 1;
+  padding: 10px;
+  background-color: white;
+  overflow-y: auto;
+}
+
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  background-color: #007bff;
+  color: white;
+  text-align: center;
+  line-height: 30px;
+  z-index: 5;
+  font-size: 12px;
+}

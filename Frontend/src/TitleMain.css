@@ -1,0 +1,30 @@
+/* TitleMain.css */
+
+.title-container {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: bold;
+  font-size: 36px;
+  text-align: left;
+}
+
+.title-powered {
+  display: flex;
+  align-items: center;
+  margin-left: 450px;
+  font-size: 16px;
+  font-style: italic;
+}
+
+.title-logo {
+  width: 30px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.title-subtext {
+  text-align: left;
+  margin-left: 800px;
+  font-size: 10px;
+  font-style: italic;
+  margin-top: 5px;
+}

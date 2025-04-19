@@ -1,0 +1,109 @@
+.management-container {
+    text-align: center;
+    padding: 20px;
+    margin: 20px;
+    background-color: #B3D9FF; /* Light blue background */
+}
+
+.management-header {
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.management-logo {
+    width: 25%;
+    max-width: 200px;
+    margin: 20px 0;
+}
+
+.management-menah-logo {
+    width: 5%;
+    max-width: 40px;
+}
+
+.management-footer {
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.management-subfooter {
+    font-size: 12px;
+    font-style: italic;
+    color: #555;
+}
+
+.login-holder {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    width: 300px;
+    display: inline-block;
+    text-align: left;
+}
+
+.profile-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+.management-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px;
+}
+
+.management-options {
+    margin-top: 20px;
+}
+
+.management-options h3 {
+    margin-bottom: 10px;
+}
+
+.management-login-button,
+.management-create-profile-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 5px;
+}
+
+.management-button:hover {
+    background-color: #4C8BF5;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.common-profile-container {
+  background-color: white;
+  padding: 30px;
+  max-width: 400px;
+  margin: 40px auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.profile-type-selector {
+  margin: 20px 0;
+  text-align: left;
+}
+
+.profile-type-selector label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.profile-type-selector select {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+}

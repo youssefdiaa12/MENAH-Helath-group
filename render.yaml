@@ -1,0 +1,7 @@
+services: 
+  - type: web
+    name: Halebi2Frontend
+    env: node
+    rootDir: Frontend
+    buildCommand: npm install vite && npm install && npm run build
+    startCommand: npx serve -s dist -l 3000

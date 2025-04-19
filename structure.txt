@@ -1,0 +1,458 @@
+Folder PATH listing for volume OS
+Volume serial number is 5045-2EF9
+C:.
+¦   .env
+¦   .gitattributes
+¦   Dummies.docx
+¦   empty-module.js
+¦   HalebiProject.docx
+¦   jsconfig.json
+¦   mongodb-windows-x86_64-8.0.6-signed.msi
+¦   package-lock.json
+¦   package.json
+¦   python
+¦   server.js
+¦   structure.txt
+¦   vite.config.js
+¦   
++---.idea
+¦   ¦   Halebi.iml
+¦   ¦   misc.xml
+¦   ¦   modules.xml
+¦   ¦   vcs.xml
+¦   ¦   workspace.xml
+¦   ¦   
+¦   +---inspectionProfiles
+¦           profiles_settings.xml
+¦           
++---Backend
++---build
++---Frontend
+¦   ¦   index.html
+¦   ¦   vite.config.js
+¦   ¦   
+¦   +---src
+¦       ¦   App.css
+¦       ¦   App.jsx
+¦       ¦   db.js
+¦       ¦   index.css
+¦       ¦   index.jsx
+¦       ¦   TitleMain.css
+¦       ¦   TitleMain.jsx
+¦       ¦   
+¦       +---assets
+¦       ¦   ¦   Halebi.png
+¦       ¦   ¦   
+¦       ¦   +---images
+¦       ¦   ¦       baby foot sole.png
+¦       ¦   ¦       Face_Photo_BG Yahya_123456.png
+¦       ¦   ¦       images.jpg
+¦       ¦   ¦       
+¦       ¦   +---styles
+¦       ¦           App.css
+¦       ¦           global.css
+¦       ¦           theme.css
+¦       ¦           
+¦       +---components
+¦       ¦   ¦   BabyInfo.jsx
+¦       ¦   ¦   MotherInfo.jsx
+¦       ¦   ¦   
+¦       ¦   +---BabyFacePhoto
+¦       ¦   ¦       BabyFacePhoto.jsx
+¦       ¦   ¦       BabyFacePhotoCapture.jsx
+¦       ¦   ¦       BabyFacePhotoHelp.jsx
+¦       ¦   ¦       BabyFacePhotoSave.jsx
+¦       ¦   ¦       BabyFacePhotoUpload.jsx
+¦       ¦   ¦       
+¦       ¦   +---BabyFootPrint
+¦       ¦   ¦       BabyFootPrint.jsx
+¦       ¦   ¦       BabyFootPrintCapture.jsx
+¦       ¦   ¦       BabyFootPrintHelp.jsx
+¦       ¦   ¦       BabyFootPrintScan.jsx
+¦       ¦   ¦       BabyFootPrintUpload.jsx
+¦       ¦   ¦       
+¦       ¦   +---BabyRetinaPrint
+¦       ¦   ¦       BabyRetinaPrint.jsx
+¦       ¦   ¦       BabyRetinaPrintCapture.jsx
+¦       ¦   ¦       BabyRetinaPrintHelp.jsx
+¦       ¦   ¦       BabyRetinaPrintScan.jsx
+¦       ¦   ¦       BabyRetinaPrintUpload.jsx
+¦       ¦   ¦       
+¦       ¦   +---EBMDelivery
+¦       ¦   ¦       EBMDelivery.jsx
+¦       ¦   ¦       EBMDeliveryCalc.jsx
+¦       ¦   ¦       EBMDeliveryInfo.jsx
+¦       ¦   ¦       EBMDeliveryTable.jsx
+¦       ¦   ¦       QRCodeGenerate.jsx
+¦       ¦   ¦       QRCodePrint.jsx
+¦       ¦   ¦       QRCodeReprint.jsx
+¦       ¦   ¦       
+¦       ¦   +---EBMUse
+¦       ¦   ¦       EBMUse.jsx
+¦       ¦   ¦       EBMUseCalc.jsx
+¦       ¦   ¦       EBMUseInfo.jsx
+¦       ¦   ¦       EBMUseTable.jsx
+¦       ¦   ¦       
+¦       ¦   +---EBMVerify
+¦       ¦   ¦       EBMVerify.jsx
+¦       ¦   ¦       EBMVerifyFace.jsx
+¦       ¦   ¦       EBMVerifyFoot.jsx
+¦       ¦   ¦       EBMVerifyQRBand.jsx
+¦       ¦   ¦       EBMVerifyRetina.jsx
+¦       ¦   ¦       MotherVerifyFingerPrint.jsx
+¦       ¦   ¦       MotherVerifyID.jsx
+¦       ¦   ¦       
+¦       ¦   +---Management
+¦       ¦   ¦   ¦   AutoLogout.jsx
+¦       ¦   ¦   ¦   CommonLogin.jsx
+¦       ¦   ¦   ¦   Management.css
+¦       ¦   ¦   ¦   Management.jsx
+¦       ¦   ¦   ¦   NurseVerificationNotification.jsx
+¦       ¦   ¦   ¦   ProtectedRoute.jsx
+¦       ¦   ¦   ¦   
+¦       ¦   ¦   +---Admin
+¦       ¦   ¦   ¦       AdminPendingApprovals.jsx
+¦       ¦   ¦   ¦       AdminProfileCreation.jsx
+¦       ¦   ¦   ¦       AdminProfileView.jsx
+¦       ¦   ¦   ¦       
+¦       ¦   ¦   +---CommonProfiles
+¦       ¦   ¦   ¦       AdminAllLogHistory.jsx
+¦       ¦   ¦   ¦       AdminAllProfilesView.jsx
+¦       ¦   ¦   ¦       AdminLogHistory.jsx
+¦       ¦   ¦   ¦       AdminProfileInfo.jsx
+¦       ¦   ¦   ¦       CommonProfileCreate.jsx
+¦       ¦   ¦   ¦       
+¦       ¦   ¦   +---Message
+¦       ¦   ¦   ¦       EBMHealthTipArabic.jsx
+¦       ¦   ¦   ¦       EBMHealthTipEnglish.jsx
+¦       ¦   ¦   ¦       MessageCenter.jsx
+¦       ¦   ¦   ¦       MessageContext.js
+¦       ¦   ¦   ¦       MessageInbox.jsx
+¦       ¦   ¦   ¦       MessageList.jsx
+¦       ¦   ¦   ¦       MessageSend.jsx
+¦       ¦   ¦   ¦       MessageThread.jsx
+¦       ¦   ¦   ¦       MessageTipDisplay.jsx
+¦       ¦   ¦   ¦       MessageUtils.js
+¦       ¦   ¦   ¦       
+¦       ¦   ¦   +---Nurses
+¦       ¦   ¦   ¦       NurseLogHistory.jsx
+¦       ¦   ¦   ¦       NurseLogin.jsx
+¦       ¦   ¦   ¦       NurseProfileInfo.jsx
+¦       ¦   ¦   ¦       NurseProfileView.jsx
+¦       ¦   ¦   ¦       NurseVerificationErrors.jsx
+¦       ¦   ¦   ¦       
+¦       ¦   ¦   +---Parents
+¦       ¦   ¦           ParentLogin.jsx
+¦       ¦   ¦           ParentProfileInfo.jsx
+¦       ¦   ¦           ParentProfileView.jsx
+¦       ¦   ¦           Parents.jsx
+¦       ¦   ¦           
+¦       ¦   +---MotherFingerPrint
+¦       ¦   ¦       MotherFingerPrint.jsx
+¦       ¦   ¦       MotherFingerPrintCapture.jsx
+¦       ¦   ¦       MotherFingerPrintHelp.jsx
+¦       ¦   ¦       MotherFingerPrintScan.jsx
+¦       ¦   ¦       MotherFingerPrintUpload.jsx
+¦       ¦   ¦       
+¦       ¦   +---MotherInfoID
+¦       ¦       ¦   extractFromImage.jsx
+¦       ¦       ¦   MotherInfoID.jsx
+¦       ¦       ¦   
+¦       ¦       +---MotherInfoIDCapture
+¦       ¦       ¦       MotherInfoIDCapture.jsx
+¦       ¦       ¦       MotherInfoIDCaptureBack.jsx
+¦       ¦       ¦       MotherInfoIDCaptureFront.jsx
+¦       ¦       ¦       
+¦       ¦       +---MotherInfoIDScan
+¦       ¦       ¦       MotherInfoIDScan.jsx
+¦       ¦       ¦       MotherInfoIDScanBack.jsx
+¦       ¦       ¦       MotherInfoIDScanFront.jsx
+¦       ¦       ¦       
+¦       ¦       +---MotherInfoIDUpload
+¦       ¦               MotherInfoIDUpload.jsx
+¦       ¦               MotherInfoIDUploadBack.jsx
+¦       ¦               MotherInfoIDUploadFront.jsx
+¦       ¦               
+¦       +---context
+¦       ¦       AuthContext.jsx
+¦       ¦       BabyContext.jsx
+¦       ¦       
+¦       +---Home
+¦       ¦       BottomBar.css
+¦       ¦       BottomBar.jsx
+¦       ¦       HomeMain.css
+¦       ¦       HomeMain.jsx
+¦       ¦       LeftBar.css
+¦       ¦       LeftBar.jsx
+¦       ¦       RightBar.css
+¦       ¦       RightBar.jsx
+¦       ¦       TopBar.css
+¦       ¦       TopBar.jsx
+¦       ¦       TopBarContent.css
+¦       ¦       TopBarContent.jsx
+¦       ¦       WorkPlace.css
+¦       ¦       WorkPlace.jsx
+¦       ¦       
+¦       +---models
+¦       ¦       UserProfile.js
+¦       ¦       
+¦       +---routes
+¦       ¦       userProfileRoutes.js
+¦       ¦       
+¦       +---services
+¦       +---shared
+¦       +---utils
++---Halebi
+¦   ¦   .env
+¦   ¦   .gitattributes
+¦   ¦   Dummies.docx
+¦   ¦   empty-module.js
+¦   ¦   Halebi2-Structure.txt
+¦   ¦   HalebiProject.docx
+¦   ¦   jsconfig.json
+¦   ¦   package-lock.json
+¦   ¦   package.json
+¦   ¦   python
+¦   ¦   server.js
+¦   ¦   vite.config.js
+¦   ¦   
+¦   +---.idea
+¦   ¦   ¦   Halebi.iml
+¦   ¦   ¦   misc.xml
+¦   ¦   ¦   modules.xml
+¦   ¦   ¦   vcs.xml
+¦   ¦   ¦   workspace.xml
+¦   ¦   ¦   
+¦   ¦   +---inspectionProfiles
+¦   ¦           profiles_settings.xml
+¦   ¦           
+¦   +---docs
+¦   ¦   ¦   favicon.ico
+¦   ¦   ¦   index.html
+¦   ¦   ¦   
+¦   ¦   +---src
+¦   ¦           index.jsx
+¦   ¦           
+¦   +---Frontend
+¦   ¦   ¦   index.html
+¦   ¦   ¦   vite.config.js
+¦   ¦   ¦   
+¦   ¦   +---dist
+¦   ¦   ¦   ¦   index.html
+¦   ¦   ¦   ¦   
+¦   ¦   ¦   +---assets
+¦   ¦   ¦           index-CHeXnX0v.js
+¦   ¦   ¦           index-QYLwAD0u.css
+¦   ¦   ¦           
+¦   ¦   +---src
+¦   ¦       ¦   App.css
+¦   ¦       ¦   App.jsx
+¦   ¦       ¦   db.js
+¦   ¦       ¦   index.css
+¦   ¦       ¦   index.jsx
+¦   ¦       ¦   TitleMain.css
+¦   ¦       ¦   TitleMain.jsx
+¦   ¦       ¦   
+¦   ¦       +---assets
+¦   ¦       ¦   ¦   Halebi.png
+¦   ¦       ¦   ¦   
+¦   ¦       ¦   +---images
+¦   ¦       ¦   ¦       baby foot sole.png
+¦   ¦       ¦   ¦       Face_Photo_BG Yahya_123456.png
+¦   ¦       ¦   ¦       images.jpg
+¦   ¦       ¦   ¦       
+¦   ¦       ¦   +---styles
+¦   ¦       ¦           App.css
+¦   ¦       ¦           global.css
+¦   ¦       ¦           theme.css
+¦   ¦       ¦           
+¦   ¦       +---components
+¦   ¦       ¦   ¦   BabyInfo.jsx
+¦   ¦       ¦   ¦   MotherInfo.jsx
+¦   ¦       ¦   ¦   
+¦   ¦       ¦   +---BabyFacePhoto
+¦   ¦       ¦   ¦       BabyFacePhoto.jsx
+¦   ¦       ¦   ¦       BabyFacePhotoCapture.jsx
+¦   ¦       ¦   ¦       BabyFacePhotoHelp.jsx
+¦   ¦       ¦   ¦       BabyFacePhotoSave.jsx
+¦   ¦       ¦   ¦       BabyFacePhotoUpload.jsx
+¦   ¦       ¦   ¦       
+¦   ¦       ¦   +---BabyFootPrint
+¦   ¦       ¦   ¦       BabyFootPrint.jsx
+¦   ¦       ¦   ¦       BabyFootPrintCapture.jsx
+¦   ¦       ¦   ¦       BabyFootPrintHelp.jsx
+¦   ¦       ¦   ¦       BabyFootPrintScan.jsx
+¦   ¦       ¦   ¦       BabyFootPrintUpload.jsx
+¦   ¦       ¦   ¦       
+¦   ¦       ¦   +---BabyRetinaPrint
+¦   ¦       ¦   ¦       BabyRetinaPrint.jsx
+¦   ¦       ¦   ¦       BabyRetinaPrintCapture.jsx
+¦   ¦       ¦   ¦       BabyRetinaPrintHelp.jsx
+¦   ¦       ¦   ¦       BabyRetinaPrintScan.jsx
+¦   ¦       ¦   ¦       BabyRetinaPrintUpload.jsx
+¦   ¦       ¦   ¦       
+¦   ¦       ¦   +---EBMDelivery
+¦   ¦       ¦   ¦       EBMDelivery.jsx
+¦   ¦       ¦   ¦       EBMDeliveryCalc.jsx
+¦   ¦       ¦   ¦       EBMDeliveryInfo.jsx
+¦   ¦       ¦   ¦       EBMDeliveryTable.jsx
+¦   ¦       ¦   ¦       QRCodeGenerate.jsx
+¦   ¦       ¦   ¦       QRCodePrint.jsx
+¦   ¦       ¦   ¦       QRCodeReprint.jsx
+¦   ¦       ¦   ¦       
+¦   ¦       ¦   +---EBMUse
+¦   ¦       ¦   ¦       EBMUse.jsx
+¦   ¦       ¦   ¦       EBMUseCalc.jsx
+¦   ¦       ¦   ¦       EBMUseInfo.jsx
+¦   ¦       ¦   ¦       EBMUseTable.jsx
+¦   ¦       ¦   ¦       
+¦   ¦       ¦   +---EBMVerify
+¦   ¦       ¦   ¦       EBMVerify.jsx
+¦   ¦       ¦   ¦       EBMVerifyFace.jsx
+¦   ¦       ¦   ¦       EBMVerifyFoot.jsx
+¦   ¦       ¦   ¦       EBMVerifyQRBand.jsx
+¦   ¦       ¦   ¦       EBMVerifyRetina.jsx
+¦   ¦       ¦   ¦       MotherVerifyFingerPrint.jsx
+¦   ¦       ¦   ¦       MotherVerifyID.jsx
+¦   ¦       ¦   ¦       
+¦   ¦       ¦   +---Management
+¦   ¦       ¦   ¦   ¦   AutoLogout.jsx
+¦   ¦       ¦   ¦   ¦   CommonLogin.jsx
+¦   ¦       ¦   ¦   ¦   Management.css
+¦   ¦       ¦   ¦   ¦   Management.jsx
+¦   ¦       ¦   ¦   ¦   NurseVerificationNotification.jsx
+¦   ¦       ¦   ¦   ¦   ProtectedRoute.jsx
+¦   ¦       ¦   ¦   ¦   
+¦   ¦       ¦   ¦   +---Admin
+¦   ¦       ¦   ¦   ¦       AdminPendingApprovals.jsx
+¦   ¦       ¦   ¦   ¦       AdminProfileCreation.jsx
+¦   ¦       ¦   ¦   ¦       AdminProfileView.jsx
+¦   ¦       ¦   ¦   ¦       
+¦   ¦       ¦   ¦   +---CommonProfiles
+¦   ¦       ¦   ¦   ¦       AdminAllLogHistory.jsx
+¦   ¦       ¦   ¦   ¦       AdminAllProfilesView.jsx
+¦   ¦       ¦   ¦   ¦       AdminLogHistory.jsx
+¦   ¦       ¦   ¦   ¦       AdminProfileInfo.jsx
+¦   ¦       ¦   ¦   ¦       CommonProfileCreate.jsx
+¦   ¦       ¦   ¦   ¦       
+¦   ¦       ¦   ¦   +---Message
+¦   ¦       ¦   ¦   ¦       EBMHealthTipArabic.jsx
+¦   ¦       ¦   ¦   ¦       EBMHealthTipEnglish.jsx
+¦   ¦       ¦   ¦   ¦       MessageCenter.jsx
+¦   ¦       ¦   ¦   ¦       MessageContext.js
+¦   ¦       ¦   ¦   ¦       MessageInbox.jsx
+¦   ¦       ¦   ¦   ¦       MessageList.jsx
+¦   ¦       ¦   ¦   ¦       MessageSend.jsx
+¦   ¦       ¦   ¦   ¦       MessageThread.jsx
+¦   ¦       ¦   ¦   ¦       MessageTipDisplay.jsx
+¦   ¦       ¦   ¦   ¦       MessageUtils.js
+¦   ¦       ¦   ¦   ¦       
+¦   ¦       ¦   ¦   +---Nurses
+¦   ¦       ¦   ¦   ¦       NurseLogHistory.jsx
+¦   ¦       ¦   ¦   ¦       NurseLogin.jsx
+¦   ¦       ¦   ¦   ¦       NurseProfileInfo.jsx
+¦   ¦       ¦   ¦   ¦       NurseProfileView.jsx
+¦   ¦       ¦   ¦   ¦       NurseVerificationErrors.jsx
+¦   ¦       ¦   ¦   ¦       
+¦   ¦       ¦   ¦   +---Parents
+¦   ¦       ¦   ¦           ParentLogin.jsx
+¦   ¦       ¦   ¦           ParentProfileInfo.jsx
+¦   ¦       ¦   ¦           ParentProfileView.jsx
+¦   ¦       ¦   ¦           Parents.jsx
+¦   ¦       ¦   ¦           
+¦   ¦       ¦   +---MotherFingerPrint
+¦   ¦       ¦   ¦       MotherFingerPrint.jsx
+¦   ¦       ¦   ¦       MotherFingerPrintCapture.jsx
+¦   ¦       ¦   ¦       MotherFingerPrintHelp.jsx
+¦   ¦       ¦   ¦       MotherFingerPrintScan.jsx
+¦   ¦       ¦   ¦       MotherFingerPrintUpload.jsx
+¦   ¦       ¦   ¦       
+¦   ¦       ¦   +---MotherInfoID
+¦   ¦       ¦       ¦   extractFromImage.jsx
+¦   ¦       ¦       ¦   MotherInfoID.jsx
+¦   ¦       ¦       ¦   
+¦   ¦       ¦       +---MotherInfoIDCapture
+¦   ¦       ¦       ¦       MotherInfoIDCapture.jsx
+¦   ¦       ¦       ¦       MotherInfoIDCaptureBack.jsx
+¦   ¦       ¦       ¦       MotherInfoIDCaptureFront.jsx
+¦   ¦       ¦       ¦       
+¦   ¦       ¦       +---MotherInfoIDScan
+¦   ¦       ¦       ¦       MotherInfoIDScan.jsx
+¦   ¦       ¦       ¦       MotherInfoIDScanBack.jsx
+¦   ¦       ¦       ¦       MotherInfoIDScanFront.jsx
+¦   ¦       ¦       ¦       
+¦   ¦       ¦       +---MotherInfoIDUpload
+¦   ¦       ¦               MotherInfoIDUpload.jsx
+¦   ¦       ¦               MotherInfoIDUploadBack.jsx
+¦   ¦       ¦               MotherInfoIDUploadFront.jsx
+¦   ¦       ¦               
+¦   ¦       +---context
+¦   ¦       ¦       AuthContext.jsx
+¦   ¦       ¦       BabyContext.jsx
+¦   ¦       ¦       
+¦   ¦       +---Home
+¦   ¦       ¦       BottomBar.css
+¦   ¦       ¦       BottomBar.jsx
+¦   ¦       ¦       HomeMain.css
+¦   ¦       ¦       HomeMain.jsx
+¦   ¦       ¦       LeftBar.css
+¦   ¦       ¦       LeftBar.jsx
+¦   ¦       ¦       RightBar.css
+¦   ¦       ¦       RightBar.jsx
+¦   ¦       ¦       TopBar.css
+¦   ¦       ¦       TopBar.jsx
+¦   ¦       ¦       TopBarContent.css
+¦   ¦       ¦       TopBarContent.jsx
+¦   ¦       ¦       WorkPlace.css
+¦   ¦       ¦       WorkPlace.jsx
+¦   ¦       ¦       
+¦   ¦       +---models
+¦   ¦       ¦       UserProfile.js
+¦   ¦       ¦       
+¦   ¦       +---routes
+¦   ¦               userProfileRoutes.js
+¦   ¦               
+¦   +---node_modules
+¦   ¦   ¦   .package-lock.json
+¦   ¦   ¦   
+¦   ¦   +---.bin
+¦   ¦   ¦       browserslist
+¦   ¦   ¦       browserslist.cmd
+¦   ¦   ¦       browserslist.ps1
+¦   ¦   ¦       esbuild
+¦   ¦   ¦       esbuild.cmd
+¦   ¦   ¦       esbuild.ps1
+¦   ¦   ¦       jsesc
+¦   ¦   ¦       jsesc.cmd
+¦   ¦   ¦       jsesc.ps1
+¦   ¦   ¦       json5
+¦   ¦   ¦       json5.cmd
+¦   ¦   ¦       json5.ps1
+¦   ¦   ¦       loose-envify
+¦   ¦   ¦       loose-envify.cmd
+¦   ¦   ¦       loose-envify.ps1
+¦   ¦   ¦       mime
+¦   ¦   ¦       mime.cmd
+¦   ¦   ¦       mime.ps1
+¦   ¦   ¦       nanoid
+¦   ¦   ¦       nanoid.cmd
+¦   ¦   ¦       nanoid.ps1
+¦   ¦   ¦       opencollective-postinstall
+¦   ¦   ¦       opencollective-postinstall.cmd
+¦   ¦   ¦       opencollective-postinstall.ps1
+¦   ¦   ¦       parser
+¦   ¦   ¦       parser.cmd
+¦   ¦   ¦       parser.ps1
+¦   ¦   ¦       qrcode
+¦   ¦   ¦       qrcode.cmd
+¦   ¦   ¦       qrcode.ps1
+¦   ¦   ¦       rollup
+¦   ¦   ¦       rollup.cmd
+¦   ¦   ¦       rollup.ps1
+¦   ¦   ¦       update-browserslist-db
+¦   ¦   ¦       update-browserslist-db.cmd
+¦   ¦   ¦       update-browserslist-db.ps1
+¦   ¦   ¦       vite
+¦   ¦   ¦       vite.cmd
+¦   ¦   ¦       vite.ps1
+¦   ¦   ¦       

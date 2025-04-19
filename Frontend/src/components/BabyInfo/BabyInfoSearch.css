@@ -1,0 +1,46 @@
+/* C:\Users\yahya\Halebi2\Frontend\src\components\BabyInfo\BabyInfoSearch.css */
+
+.baby-search-button {
+  padding: 6px 12px;
+  background-color: white;
+  color: #0078D4;
+  border: 1px solid #0078D4;
+  border-radius: 4px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.baby-search-popup {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -20%);
+  background-color: #f9f9f9;
+  padding: 15px;
+  border: 2px solid #0078D4;
+  border-radius: 6px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.25);
+  z-index: 9999;
+  width: 300px;
+}
+
+.baby-search-input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.baby-search-find {
+  width: 100%;
+  padding: 6px;
+  background-color: #0078D4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+}
