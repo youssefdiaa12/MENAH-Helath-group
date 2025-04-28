@@ -19,7 +19,7 @@ class EBMModel {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const connection = yield database_1.default.connect();
-                const EMPQuery = 'INSERT INTO public.bottle (order, date_of_expression, date_of_delivery, volume,mother_id) values ($1,$2,$3,$4,$5) returning *';
+                const EMPQuery = 'INSERT INTO public.bottle (order_number, date_of_expression, date_of_delivery, volume,mother_id) values ($1,$2,$3,$4,$5) returning *';
                 const EMPResponse = yield connection.query(EMPQuery, [ebmData.order, ebmData.date_of_expression, ebmData.date_of_delivery, ebmData.volume, ebmData.mother_id]);
                 connection.release;
                 return EMPResponse.rows[0];
@@ -35,10 +35,26 @@ class EBMModel {
                 const connection = yield database_1.default.connect();
                 const SelectebmQuery = `select * from public.bottle`;
                 const ebm = yield connection.query(SelectebmQuery);
-                if (typeof ebm.rows[0] === 'undefined') {
+                if (typeof ebm.rows === 'undefined') {
                     return null;
                 }
-                return ebm.rows[0];
+                return ebm.rows;
+            }
+            catch (error) {
+                throw new Error(`ebm selection error in ebm models: ${error}`);
+            }
+        });
+    }
+    SelectBottle(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const connection = yield database_1.default.connect();
+                const SelectebmQuery = `select * from public.bottle where order_number =($1) or mother_id=($1)`;
+                const ebm = yield connection.query(SelectebmQuery, [id]);
+                if (typeof ebm.rows === 'undefined') {
+                    return null;
+                }
+                return ebm.rows;
             }
             catch (error) {
                 throw new Error(`ebm selection error in ebm models: ${error}`);

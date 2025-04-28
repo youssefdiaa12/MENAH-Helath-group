@@ -30,5 +30,23 @@ export class EBMModel{
             throw new Error(`ebm selection error in ebm models: ${error}`);
         }
     }
+    async SelectBottle(id:string): Promise<ebmInfo[]|null>{
+        try{
+            if (!id || id.trim() === '' || id.trim().toLowerCase() === 'null') {
+                return null;
+            }
+            const connection = await client.connect();
+            const SelectebmQuery = `select * from public.bottle where order_number =($1) or mother_id=($1)`;
+            const ebm = await connection.query(SelectebmQuery,[id]);
+            if(typeof ebm.rows === 'undefined'){
+                return null;
+            }
+            return ebm.rows;
+
+        }
+        catch(error){
+            throw new Error(`ebm selection error in ebm models: ${error}`);
+        }
+    }
 
 }

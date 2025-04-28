@@ -48,3 +48,24 @@ export const SelectAllBottles = async () =>{
     }
 }
 
+export const SelectBottle = async (id:string) =>{
+    try{
+        const ebmModel = new EBMModel();
+        const ebmSearchResult = await ebmModel.SelectBottle(id)
+        if(ebmSearchResult){
+            return {
+                Status:true,
+                Data: ebmSearchResult,
+                Message: "Bottle are retrieved successfully"
+            } 
+        }
+        return {
+            Status:false,
+            Data:null,
+            Message: "No Bottle not found!"
+        } 
+    }
+    catch(err){
+        throw new Error(`error in selecting bottles in ebm contoller: ${err}`);
+    }
+}
