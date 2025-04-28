@@ -1,0 +1,82 @@
+1- delivery date is the date that the mother will bring milk to the hospital, date of expression means when the milk pumped
+
+2- QR code is the code that will contain the mother and the child info 
+
+3-QR Code will be in 2 places in the bottle and the baby hand(QR Band) 
+
+4- QR Code data ---------> [date of birth, name of the baby, MRN (Medical record number), below  you will be bottle number should be unique and mix of digits and number )
+
+5- the bottle volume is the nurse responsability. , their should be abm calculator , sum of the bottle volumes should be generated.
+
+6- validation of milk --- nurse, baby, mother , bottle of milk.
+
+7- BIO Data : we take a snip to generate virtual picture of the baby then save it.
+
+8- foot print --- using foot print scanner using driver or camera.
+
+9- ratina print , ratina scan 
+
+we should have baby face photo, baby foot print photo , baby ratina print, baby info.
+
+10 - we have mother info mother ID. 
+11- foot print could be done by camera. but it will be scanner.
+
+12 - nurse name, username, unique number.
+
+
+what will nurse do? scaning for the QR Code of the bottle then check the child using his QR Code on his arm or his face photo or ratina scan then send message to another nurse to verify the process.
+
+if there's no match on the child?? like the QR Code not works and ratina scan not recognize the baby and his photo not defined.
+
+then second verification will be the mother (mother ID , Mother finger print). if matched this time? this means that the QR Code not works so in this case we need to solve it.
+
+we then update the milk used in the cumulative.
+
+
+
+EBM Delivery Section
+
+This is where details about breast milk bottles delivered to the hospital are recorded:
+
+Date of expression – when the milk was pumped.
+
+Date of delivery – when the milk arrived at the hospital.
+
+Bottle info – number, unique identifier (linked via QR code), volume.
+
+This info is saved and linked to the baby using their name and MRN.
+
+EBM Verification
+
+This is a critical safety step to ensure the right milk goes to the right baby:
+
+A nurse scans the milk bottle QR code.
+
+The system compares it to stored data like:
+
+Baby face photo
+
+Retina or footprint
+
+Baby QR code band
+
+If it matches, another nurse must verify again (double-check).
+
+If any mismatch:
+
+Try matching the bottle with the mother’s ID.
+
+If still no match, display a warning to not give the milk.
+
+EBM Usage Section
+
+This is where milk usage is recorded:
+
+Which bottle was used.
+
+How much milk was given.
+
+How much was discarded (waste calculation).
+
+Again, everything is saved and linked to the baby.
+

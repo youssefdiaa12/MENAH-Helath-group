@@ -1,0 +1,10 @@
+how can we know that the current child that we failed to scan QR Code is the relevant child to the mother's we are going to scan her ID.
+
+should we make it automatically calculated CGA and DOB?
+
+Gravida	How many times the mother has been pregnant (includes current pregnancy and even miscarriages).
+Para	How many times the mother has given birth after 20 weeks of pregnancy (regardless of outcome: alive or stillborn).
+Abortion	How many times the mother has lost pregnancy before 20 weeks (miscarriages or induced abortions).
+Type of Delivery	How the baby was delivered — like Normal Delivery, C-section (Cesarean), Vacuum, etc.
+
+why should i wrote order while i can automatically calculated by getting count of bottles generated for this mother , initialize the beginning by 0 and every bottle increase by 1.
