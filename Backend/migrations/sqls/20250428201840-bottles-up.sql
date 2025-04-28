@@ -2,7 +2,7 @@
 
 create table bottle(
     id serial primary key,
-    order integer,
+    order_number integer,
     date_of_expression date,
     date_of_delivery date,
     volume NUMERIC(10, 2) NOT NULL,

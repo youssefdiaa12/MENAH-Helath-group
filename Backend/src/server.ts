@@ -4,6 +4,8 @@ import userRouter from "./Routes/Users/UsersRoute"
 import imagesRouter from "./Routes/Users/ImageRouter"
 import {validateMiddleWare} from "./MiddleWares/Authentication"
 import {IsNurseValidation} from "./MiddleWares/isNurse"
+import EBMRouter from "./Routes/Nurse/EBMRoute"
+
 
 import babyRouter from "./Routes/Nurse/BabyRoute"
 import cors from "cors";
@@ -19,7 +21,7 @@ app.use(bodyParser.json())
 app.use('/user',userRouter)
 app.use('/image',imagesRouter)
 app.use("/baby",validateMiddleWare,IsNurseValidation,babyRouter)
-
+app.use("/bottle",validateMiddleWare,IsNurseValidation ,EBMRouter)
 
 
 app.listen(port,()=>{

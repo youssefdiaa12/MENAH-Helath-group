@@ -9,6 +9,7 @@ const UsersRoute_1 = __importDefault(require("./Routes/Users/UsersRoute"));
 const ImageRouter_1 = __importDefault(require("./Routes/Users/ImageRouter"));
 const Authentication_1 = require("./MiddleWares/Authentication");
 const isNurse_1 = require("./MiddleWares/isNurse");
+const EBMRoute_1 = __importDefault(require("./Routes/Nurse/EBMRoute"));
 const BabyRoute_1 = __importDefault(require("./Routes/Nurse/BabyRoute"));
 const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
@@ -20,6 +21,7 @@ app.use(body_parser_1.default.json());
 app.use('/user', UsersRoute_1.default);
 app.use('/image', ImageRouter_1.default);
 app.use("/baby", Authentication_1.validateMiddleWare, isNurse_1.IsNurseValidation, BabyRoute_1.default);
+app.use("/bottle", Authentication_1.validateMiddleWare, isNurse_1.IsNurseValidation, EBMRoute_1.default);
 app.listen(port, () => {
     console.log(`server started at http://localhost:${port}`);
 });
