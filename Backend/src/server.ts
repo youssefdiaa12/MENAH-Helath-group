@@ -5,7 +5,7 @@ import imagesRouter from "./Routes/Users/ImageRouter"
 import {validateMiddleWare} from "./MiddleWares/Authentication"
 import {IsNurseValidation} from "./MiddleWares/isNurse"
 import EBMRouter from "./Routes/Nurse/EBMRoute"
-
+import MessageRouter from "./Routes/Messages/MessagesRoute"
 
 import babyRouter from "./Routes/Nurse/BabyRoute"
 import cors from "cors";
@@ -22,7 +22,7 @@ app.use('/user',userRouter)
 app.use('/image',imagesRouter)
 app.use("/baby",validateMiddleWare,IsNurseValidation,babyRouter)
 app.use("/bottle",validateMiddleWare,IsNurseValidation ,EBMRouter)
-
+app.use("/message",validateMiddleWare,MessageRouter)
 
 app.listen(port,()=>{
     console.log(`server started at http://localhost:${port}`)

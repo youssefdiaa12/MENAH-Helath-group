@@ -46,4 +46,36 @@ EBMRouter.get("/select", (req, res) => __awaiter(void 0, void 0, void 0, functio
         res.status(500).json({ error: `bottle selection error in ebm routes: ${error}` });
     }
 }));
+EBMRouter.post("/use", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const ebmData = req.body;
+        const response = yield (0, EBMController_1.UseBottle)(ebmData);
+        res.json(response);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ error: `bottle Usage error in ebm routes: ${error}` });
+    }
+}));
+EBMRouter.post("/addVerification", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const verificationData = req.body;
+        const response = yield (0, EBMController_1.addVerification)(verificationData);
+        res.json(response);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ error: `verification addition error in ebm routes: ${error}` });
+    }
+}));
+EBMRouter.post("/verify", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const response = yield (0, EBMController_1.verify)(req.body.id, req.body.value, req.body.second_nurse, req.body.status);
+        res.json(response);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ error: `verification updating error in ebm routes: ${error}` });
+    }
+}));
 exports.default = EBMRouter;

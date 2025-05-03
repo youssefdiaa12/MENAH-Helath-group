@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SelectBottle = exports.SelectAllBottles = exports.CreateBottle = void 0;
+exports.verify = exports.addVerification = exports.UseBottle = exports.SelectBottle = exports.SelectAllBottles = exports.CreateBottle = void 0;
 const EBMModel_1 = require("../../Models/Nurse/EBMModel");
 const CreateBottle = (EBMData) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -77,3 +77,69 @@ const SelectBottle = (id) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.SelectBottle = SelectBottle;
+const UseBottle = (info) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const ebmModel = new EBMModel_1.EBMModel();
+        const ebmUsageResult = yield ebmModel.CreateBottleUsage(info.bottle_id, info.total_volume, info.total_volume_used, info.total_volume_discarded, info.date_of_usage);
+        if (ebmUsageResult) {
+            return {
+                Status: true,
+                Data: ebmUsageResult,
+                Message: "Bottle Usage is done successfully"
+            };
+        }
+        return {
+            Status: false,
+            Data: null,
+            Message: ebmUsageResult
+        };
+    }
+    catch (err) {
+        throw new Error(`error in subtracting bottles volume in ebm contoller: ${err}`);
+    }
+});
+exports.UseBottle = UseBottle;
+const addVerification = (info) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const verificationModel = new EBMModel_1.EBMModel();
+        const verificationResult = yield verificationModel.AddVerification(info);
+        if (typeof verificationResult != "string") {
+            return {
+                Status: true,
+                Data: verificationResult,
+                Message: "verification is added successfully"
+            };
+        }
+        return {
+            Status: false,
+            Data: null,
+            Message: verificationResult
+        };
+    }
+    catch (err) {
+        throw new Error(`error in adding verification in ebm contoller: ${err}`);
+    }
+});
+exports.addVerification = addVerification;
+const verify = (id, value, second_nurse, status) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const verificationModel = new EBMModel_1.EBMModel();
+        const verificationResult = yield verificationModel.verify(id, value, second_nurse, status);
+        if (typeof verificationResult != "string") {
+            return {
+                Status: true,
+                Data: verificationResult,
+                Message: "verification is updated successfully"
+            };
+        }
+        return {
+            Status: false,
+            Data: null,
+            Message: verificationResult
+        };
+    }
+    catch (err) {
+        throw new Error(`error in updating verification in ebm contoller: ${err}`);
+    }
+});
+exports.verify = verify;
