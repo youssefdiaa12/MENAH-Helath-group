@@ -1,0 +1,570 @@
+{
+	"info": {
+		"_postman_id": "f6535137-28aa-4c2d-b694-cd2127ec70b7",
+		"name": "Menah Group",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22097139",
+		"_collection_link": "https://dark-flare-20839.postman.co/workspace/My-Workspace~5771da8f-fc0a-44fb-8d2a-14ef17955adf/collection/22097139-f6535137-28aa-4c2d-b694-cd2127ec70b7?action=share&source=collection_link&creator=22097139"
+	},
+	"item": [
+		{
+			"name": "SignUp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "nurse241",
+							"type": "text"
+						},
+						{
+							"key": "firstname",
+							"value": "mohamed",
+							"type": "text"
+						},
+						{
+							"key": "lastname",
+							"value": "amr",
+							"type": "text"
+						},
+						{
+							"key": "mobile",
+							"value": "01111701931",
+							"type": "text"
+						},
+						{
+							"key": "profileImage",
+							"type": "file",
+							"src": "/C:/Users/medoa/Pictures/Screenshots/Screenshot 2025-04-23 113729.png"
+						},
+						{
+							"key": "password",
+							"value": "mohamed123",
+							"type": "text"
+						},
+						{
+							"key": "profileType",
+							"value": "nurse",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/user/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "signin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"mohamed241\",\r\n    \"password\":\"mohamed123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/user/signin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BabyCreation",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im51cnNlMjQxIiwiZmlyc3RuYW1lIjoibW9oYW1lZCIsImxhc3RuYW1lIjoiYW1yIiwicm9sZSI6Im51cnNlIiwiaXNBY3RpdmUiOnRydWUsImlhdCI6MTc0NTc3NTE2MH0.aHu_iqBFIYiRdSpPNFXSDiyBuaLRkM8eRWEO2Vw8Guk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name_ar\": \"اسم الطفل\",\r\n    \"name_en\": \"Baby Name\",\r\n    \"mrn\": 123456,\r\n    \"visit_number\": 1,\r\n    \"personal_id\": 12321,\r\n    \"birth_certificate_id\": 5566778899,\r\n    \"date_of_birth\": \"2024-04-27T00:00:00.000Z\",\r\n    \"recorded_at\": \"2024-04-27T12:00:00.000Z\",\r\n    \"days_of_life\": 0,\r\n    \"gestational_age_weeks\": 38,\r\n    \"gestational_age_days\": 4,\r\n    \"gestational_age_total\": 270,\r\n    \"gender\": \"male\",\r\n    \"birth_weight\": \"3.5 kg\",\r\n    \"mother_id\": null\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/baby/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"baby",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BabySearch",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im51cnNlMjQxIiwiZmlyc3RuYW1lIjoibW9oYW1lZCIsImxhc3RuYW1lIjoiYW1yIiwicm9sZSI6Im51cnNlIiwiaXNBY3RpdmUiOnRydWUsImlhdCI6MTc0NTc3NTE2MH0.aHu_iqBFIYiRdSpPNFXSDiyBuaLRkM8eRWEO2Vw8Guk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"value\":\"123456\",\r\n    \"field\":\"mrn\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/baby/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"baby",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateBbayVisitNumber",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im51cnNlMjQxIiwiZmlyc3RuYW1lIjoibW9oYW1lZCIsImxhc3RuYW1lIjoiYW1yIiwicm9sZSI6Im51cnNlIiwiaXNBY3RpdmUiOnRydWUsImlhdCI6MTc0NTc3NTE2MH0.aHu_iqBFIYiRdSpPNFXSDiyBuaLRkM8eRWEO2Vw8Guk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"mrn\":\"123456\",\r\n    \"visitNumber\":\"6\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/baby/updateVisitNumber",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"baby",
+						"updateVisitNumber"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "babyPhotoSaving",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im51cnNlMjQxIiwiZmlyc3RuYW1lIjoibW9oYW1lZCIsImxhc3RuYW1lIjoiYW1yIiwicm9sZSI6Im51cnNlIiwiaXNBY3RpdmUiOnRydWUsImlhdCI6MTc0NTc3NTE2MH0.aHu_iqBFIYiRdSpPNFXSDiyBuaLRkM8eRWEO2Vw8Guk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "mrn",
+							"value": "123456",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/medoa/Pictures/Screenshots/Screenshot 2025-04-21 164139.png"
+						},
+						{
+							"key": "category",
+							"value": "facephoto",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/baby/savePhoto",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"baby",
+						"savePhoto"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bottleCreation",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im51cnNlMjQxIiwiZmlyc3RuYW1lIjoibW9oYW1lZCIsImxhc3RuYW1lIjoiYW1yIiwicm9sZSI6Im51cnNlIiwiaXNBY3RpdmUiOnRydWUsImlhdCI6MTc0NTc3NTE2MH0.aHu_iqBFIYiRdSpPNFXSDiyBuaLRkM8eRWEO2Vw8Guk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"order\": 2,\r\n    \"date_of_expression\": \"2025-04-28\",\r\n    \"date_of_delivery\": \"2025-04-30\",\r\n    \"volume\": 150.75,\r\n    \"mother_id\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/bottle/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bottle",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "selectBottles",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im51cnNlMjQxIiwiZmlyc3RuYW1lIjoibW9oYW1lZCIsImxhc3RuYW1lIjoiYW1yIiwicm9sZSI6Im51cnNlIiwiaXNBY3RpdmUiOnRydWUsImlhdCI6MTc0NTc3NTE2MH0.aHu_iqBFIYiRdSpPNFXSDiyBuaLRkM8eRWEO2Vw8Guk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/bottle/select",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bottle",
+						"select"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bottleUsage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im51cnNlMjQxIiwiZmlyc3RuYW1lIjoibW9oYW1lZCIsImxhc3RuYW1lIjoiYW1yIiwicm9sZSI6Im51cnNlIiwiaXNBY3RpdmUiOnRydWUsImlhdCI6MTc0NTc3NTE2MH0.aHu_iqBFIYiRdSpPNFXSDiyBuaLRkM8eRWEO2Vw8Guk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bottle_id\":2,\r\n    \"total_volume\":100,\r\n    \"total_volume_used\":50,\r\n    \"total_volume_discarded\":50,\r\n    \"date_of_usage\":\"2025-04-28\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/bottle/use",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bottle",
+						"use"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SendMessage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im51cnNlMjQxIiwiZmlyc3RuYW1lIjoibW9oYW1lZCIsImxhc3RuYW1lIjoiYW1yIiwicm9sZSI6Im51cnNlIiwiaXNBY3RpdmUiOnRydWUsImlhdCI6MTc0NTc3NTE2MH0.aHu_iqBFIYiRdSpPNFXSDiyBuaLRkM8eRWEO2Vw8Guk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"subject\":\"Verification\",\r\n    \"body\":\"baby's band mrn is (2), baby's mrn in bottle is (2)\",\r\n    \"sender_id\":1,\r\n    \"recipient_id\":2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/message/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"message",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetSent",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im51cnNlMjQxIiwiZmlyc3RuYW1lIjoibW9oYW1lZCIsImxhc3RuYW1lIjoiYW1yIiwicm9sZSI6Im51cnNlIiwiaXNBY3RpdmUiOnRydWUsImlhdCI6MTc0NTc3NTE2MH0.aHu_iqBFIYiRdSpPNFXSDiyBuaLRkM8eRWEO2Vw8Guk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/message/sent",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"message",
+						"sent"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetRecievings",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im51cnNlMjQxIiwiZmlyc3RuYW1lIjoibW9oYW1lZCIsImxhc3RuYW1lIjoiYW1yIiwicm9sZSI6Im51cnNlIiwiaXNBY3RpdmUiOnRydWUsImlhdCI6MTc0NTc3NTE2MH0.aHu_iqBFIYiRdSpPNFXSDiyBuaLRkM8eRWEO2Vw8Guk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/message/recievings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"message",
+						"recievings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddVerification",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im51cnNlMjQxIiwiZmlyc3RuYW1lIjoibW9oYW1lZCIsImxhc3RuYW1lIjoiYW1yIiwicm9sZSI6Im51cnNlIiwiaXNBY3RpdmUiOnRydWUsImlhdCI6MTc0NTc3NTE2MH0.aHu_iqBFIYiRdSpPNFXSDiyBuaLRkM8eRWEO2Vw8Guk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bottle_id\":2,\r\n    \"baby_band_mrn\":123456,\r\n    \"bottle_baby_mrn\":123456,\r\n    \"first_nurse\":1,\r\n    \"second_nurse\":2,\r\n    \"isverified\":false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/bottle/addVerification",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bottle",
+						"addVerification"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im51cnNlMjQxIiwiZmlyc3RuYW1lIjoibW9oYW1lZCIsImxhc3RuYW1lIjoiYW1yIiwicm9sZSI6Im51cnNlIiwiaXNBY3RpdmUiOnRydWUsImlhdCI6MTc0NTc3NTE2MH0.aHu_iqBFIYiRdSpPNFXSDiyBuaLRkM8eRWEO2Vw8Guk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":1,\r\n    \"value\":true,\r\n    \"second_nurse\":1,\r\n    \"status\":\"completed\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/bottle/verify",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bottle",
+						"verify"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
