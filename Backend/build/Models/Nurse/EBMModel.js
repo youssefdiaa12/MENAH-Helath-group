@@ -71,6 +71,23 @@ class EBMModel {
             }
         });
     }
+    selectAllBottleUsage() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const connection = yield database_1.default.connect();
+                const SelectebmQuery = `select * from public.bottleusage`;
+                const ebm = yield connection.query(SelectebmQuery);
+                connection.release;
+                if (typeof ebm.rows === 'undefined') {
+                    return null;
+                }
+                return ebm.rows;
+            }
+            catch (err) {
+                throw new Error(`ebm usage selection error in ebm models: ${err}`);
+            }
+        });
+    }
     CreateBottleUsage(bottle_id, total_volume, total_volume_used, total_volume_discarded, date_of_usage) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

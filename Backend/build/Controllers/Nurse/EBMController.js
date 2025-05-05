@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.verify = exports.addVerification = exports.UseBottle = exports.SelectBottle = exports.SelectAllBottles = exports.CreateBottle = void 0;
+exports.verify = exports.addVerification = exports.UseBottle = exports.SelectBottleUsage = exports.SelectBottle = exports.SelectAllBottles = exports.CreateBottle = void 0;
 const EBMModel_1 = require("../../Models/Nurse/EBMModel");
 const CreateBottle = (EBMData) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -77,6 +77,28 @@ const SelectBottle = (id) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.SelectBottle = SelectBottle;
+const SelectBottleUsage = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const ebmModel = new EBMModel_1.EBMModel();
+        const ebmSearchResult = yield ebmModel.selectAllBottleUsage();
+        if (ebmSearchResult) {
+            return {
+                Status: true,
+                Data: ebmSearchResult,
+                Message: "Bottle Usage are retrieved successfully"
+            };
+        }
+        return {
+            Status: false,
+            Data: null,
+            Message: "No Bottle Usage not found!"
+        };
+    }
+    catch (err) {
+        throw new Error(`error in selecting bottles usage in ebm contoller: ${err}`);
+    }
+});
+exports.SelectBottleUsage = SelectBottleUsage;
 const UseBottle = (info) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const ebmModel = new EBMModel_1.EBMModel();

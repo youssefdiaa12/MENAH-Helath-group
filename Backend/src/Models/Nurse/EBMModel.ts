@@ -57,6 +57,22 @@ export class EBMModel{
             throw new Error(`ebm selection error in ebm models: ${error}`);
         }
     }
+    async selectAllBottleUsage() :Promise<BottleUsageInfo[]|null>{
+        try{
+            const connection = await client.connect();
+            const SelectebmQuery = `select * from public.bottleusage`;
+            const ebm = await connection.query(SelectebmQuery);
+            connection.release;
+
+            if(typeof ebm.rows === 'undefined'){
+                return null;
+            }
+            return ebm.rows;
+        }
+        catch(err){
+            throw new Error(`ebm usage selection error in ebm models: ${err}`);
+        }
+    }
     async CreateBottleUsage(bottle_id:number,total_volume:number,total_volume_used:number,total_volume_discarded:number,date_of_usage:Date): Promise<BottleUsageInfo|string>{
         try{
             if (!bottle_id) {
@@ -94,8 +110,25 @@ export class EBMModel{
             if(users.rows.length != 2){
                 return "first nurse or second nurse is not found";
             }
+            const babyBottle = `select order_number,mother_id from public.bottle where order_number =($1) `
+            const execute = await connection.query(babyBottle,[verificationInfo.bottle_id])
+            if(execute.rows.length ==0){
+                return "This bottle does not exist"
+            }
+            const baby = `select * from public.baby where mrn =($1) `
+            const executeBaby = await connection.query(baby,[verificationInfo.baby_band_mrn])
+            if(executeBaby.rows.length ==0){
+                return "This baby does not exist"
+            }
+            if (verificationInfo.baby_band_mrn != verificationInfo.bottle_baby_mrn){
+                return "baby's band mrn is not same as bottle's baby mrn"
+            }
+            if(executeBaby.rows[0].mother_id != execute.rows[0].mother_id){
+                return "baby's mother is not same as the owner mother of the bottle";
+            }
+
             const InsertVerificationQuery = `insert into verifications (bottle_id,baby_band_mrn,bottle_baby_mrn,first_nurse,second_nurse,isverified) values ($1,$2,$3,$4,$5,$6) returning *`;
-            const verification = await connection.query(InsertVerificationQuery,[verificationInfo.bottle_id,verificationInfo.baby_band_mrn,verificationInfo.bottle_baby_mrn,verificationInfo.first_nurse,verificationInfo.second_nurse,verificationInfo.isverified]);
+            const verification = await connection.query(InsertVerificationQuery,[verificationInfo.bottle_id,verificationInfo.baby_band_mrn,verificationInfo.bottle_baby_mrn,verificationInfo.first_nurse,verificationInfo.second_nurse,false]);
             connection.release;
             return verification.rows[0];
         }
@@ -111,6 +144,15 @@ export class EBMModel{
             if(user.rows.length != 1){
                 return "second nurse is not found";
             }
+            const nurse = `select * from public.verifications where id =($1)`;
+            const executeNurse = await connection.query(nurse,[id]);
+            if(executeNurse.rows.length == 0){
+                return "this verification is not found";
+            }
+            if(executeNurse.rows[0].second_nurse != second_nurse){
+                return "This nurse is not authorized to verify this process"
+            }
+
             const UpdateVerificationQuery = `update public.verifications set status= ($1), isverified = ($2) where id=($3) returning *`;
             const verification = await connection.query(UpdateVerificationQuery,[status,value,id]);
             connection.release;

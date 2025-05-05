@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SelectMyrecieverMessages = exports.SelectMySentMessages = exports.CreateMessage = void 0;
+exports.MarkAsRead = exports.SelectMyrecieverMessages = exports.SelectMySentMessages = exports.CreateMessage = void 0;
 const MessageModel_1 = require("../../Models/Messages/MessageModel");
 const CreateMessage = (MessData) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -77,3 +77,25 @@ const SelectMyrecieverMessages = (id) => __awaiter(void 0, void 0, void 0, funct
     }
 });
 exports.SelectMyrecieverMessages = SelectMyrecieverMessages;
+const MarkAsRead = (userId, messageId) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const MessModel = new MessageModel_1.MessageModel();
+        const MessageSearchResponse = yield MessModel.MarkAsRead(userId, messageId);
+        if (MessageSearchResponse == null) {
+            return {
+                Status: false,
+                Data: null,
+                Message: "User or message is not found "
+            };
+        }
+        return {
+            Status: true,
+            Data: MessageSearchResponse,
+            Message: "Message are updated successfully"
+        };
+    }
+    catch (err) {
+        throw new Error(`error in selecting messages in message contoller: ${err}`);
+    }
+});
+exports.MarkAsRead = MarkAsRead;

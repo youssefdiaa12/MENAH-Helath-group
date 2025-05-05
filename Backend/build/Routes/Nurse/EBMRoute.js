@@ -46,6 +46,16 @@ EBMRouter.get("/select", (req, res) => __awaiter(void 0, void 0, void 0, functio
         res.status(500).json({ error: `bottle selection error in ebm routes: ${error}` });
     }
 }));
+EBMRouter.get("/selectUsage", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const response = yield (0, EBMController_1.SelectBottleUsage)();
+        res.json(response);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ error: `bottle usage selection error in ebm routes: ${error}` });
+    }
+}));
 EBMRouter.post("/use", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const ebmData = req.body;

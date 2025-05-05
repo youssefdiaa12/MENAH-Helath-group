@@ -51,6 +51,25 @@ class MessageModel {
             }
         });
     }
+    MarkAsRead(userId, messageId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const connection = yield database_1.default.connect();
+                const SelectMessagesQuery = `select * from public.messages where recipient_id = ($1) and id=($2)`;
+                const messages = yield connection.query(SelectMessagesQuery, [userId, messageId]);
+                if (messages.rows.length == 0) {
+                    return null;
+                }
+                const updateMessage = `update public.messages set isread=true where recipient_id = ($1) and id=($2) `;
+                const updatedmessages = yield connection.query(updateMessage, [userId, messageId]);
+                connection.release;
+                return updatedmessages.rows[0];
+            }
+            catch (error) {
+                throw new Error(`message updating error in message models: ${error}`);
+            }
+        });
+    }
     SelectMeAsReciever(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

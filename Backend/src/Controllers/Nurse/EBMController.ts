@@ -70,6 +70,27 @@ export const SelectBottle = async (id:string) =>{
         throw new Error(`error in selecting bottles in ebm contoller: ${err}`);
     }
 }
+export const SelectBottleUsage = async () =>{
+    try{
+        const ebmModel = new EBMModel();
+        const ebmSearchResult = await ebmModel.selectAllBottleUsage()
+        if(ebmSearchResult){
+            return {
+                Status:true,
+                Data: ebmSearchResult,
+                Message: "Bottle Usage are retrieved successfully"
+            } 
+        }
+        return {
+            Status:false,
+            Data:null,
+            Message: "No Bottle Usage not found!"
+        } 
+    }
+    catch(err){
+        throw new Error(`error in selecting bottles usage in ebm contoller: ${err}`);
+    }
+}
 export const UseBottle = async (info:BottleUsageInfo) =>{
     try{
         const ebmModel = new EBMModel();
@@ -116,6 +137,29 @@ export const addVerification = async (info:verification) =>{
 
 export const verify = async (id:number, value:boolean, second_nurse:number,status:string) =>{
     try{
+        const validStatuses = ['completed', 'pending'];
+        const validValue = [true,false]
+        if (!validStatuses.includes(status)) {
+            return {
+                Status:false,
+                Data:null,
+                Message: 'Invalid status. Must be "completed" or "pending".'
+            }        
+        }
+        if (!validValue.includes(value)) {
+            return {
+                Status:false,
+                Data:null,
+                Message: 'Invalid value. Must be true or false.'
+            }        
+        }
+        if(id == null || value == null || second_nurse ==null || status == null){
+            return {
+                Status:false,
+                Data:null,
+                Message: 'Data is missing'
+            } 
+        }
         const verificationModel = new EBMModel();
         const verificationResult = await verificationModel.verify(id,value,second_nurse,status)
         if(typeof verificationResult != "string"){

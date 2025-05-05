@@ -1,5 +1,5 @@
 import express,{Request,Response} from 'express'
-import {CreateBottle,SelectAllBottles,SelectBottle,UseBottle,addVerification,verify} from "../../Controllers/Nurse/EBMController"
+import {CreateBottle,SelectAllBottles,SelectBottle,UseBottle,addVerification,verify,SelectBottleUsage} from "../../Controllers/Nurse/EBMController"
 import {ebmInfo,BottleUsageInfo} from "../../Types/Nurse/EBMType";
 import {verification} from "../../Types/Nurse/VerificationType"
 
@@ -39,6 +39,17 @@ EBMRouter.get("/select", async (req:Request , res: Response) => {
         res.status(500).json({ error: `bottle selection error in ebm routes: ${error}` });
     }
 });
+EBMRouter.get("/selectUsage", async (req:Request , res: Response) => {
+    try {
+        const response = await SelectBottleUsage();
+        res.json(response);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: `bottle usage selection error in ebm routes: ${error}` });
+    }
+});
+
+
 
 EBMRouter.post("/use", async (req: Request<{}, {}, BottleUsageInfo>, res: Response) => {
     try {
@@ -57,6 +68,7 @@ EBMRouter.post("/addVerification", async (req: Request<{}, {}, verification>, re
         const verificationData: verification = req.body;
 
         const response = await addVerification(verificationData);
+        
         res.json(response);
     } catch (error) {
         console.error(error);
@@ -64,9 +76,8 @@ EBMRouter.post("/addVerification", async (req: Request<{}, {}, verification>, re
     }
 });
 
-EBMRouter.post("/verify", async (req: Request, res: Response) => {
+EBMRouter.post("/verify", async (req: Request, res: Response)  => {
     try {
-
         const response = await verify(req.body.id,req.body.value,req.body.second_nurse,req.body.status);
         res.json(response);
     } catch (error) {

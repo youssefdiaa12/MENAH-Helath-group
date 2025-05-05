@@ -69,3 +69,25 @@ export const SelectMyrecieverMessages = async (id:number) =>{
         throw new Error(`error in selecting messages in message contoller: ${err}`);
     }
 }
+
+export const MarkAsRead = async (userId:number,messageId:number) =>{
+    try{
+        const MessModel = new MessageModel();
+        const MessageSearchResponse = await MessModel.MarkAsRead(userId,messageId)
+        if(typeof MessageSearchResponse != "string"){
+            return {
+                Status:true,
+                Data: MessageSearchResponse,
+                Message: "Message are updated successfully"
+            } 
+        }
+        return {
+            Status:false,
+            Data:null,
+            Message: MessageSearchResponse
+        } 
+    }
+    catch(err){
+        throw new Error(`error in selecting messages in message contoller: ${err}`);
+    }
+}

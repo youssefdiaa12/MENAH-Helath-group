@@ -37,6 +37,18 @@ MessageRouter.post("/sent", (req, res) => __awaiter(void 0, void 0, void 0, func
         res.status(500).json({ error: `Message syncing error in Message routes: ${error}` });
     }
 }));
+MessageRouter.post("/markAsRead", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const userId = req.body.userId;
+        const messageId = req.body.id;
+        const response = yield (0, MessageController_1.MarkAsRead)(userId, messageId);
+        res.json(response);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ error: `Message updating error in Message routes: ${error}` });
+    }
+}));
 MessageRouter.post("/recievings", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.body.id;
