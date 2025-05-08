@@ -46,7 +46,24 @@ userRouter.post('/signup', upload.single('profileImage'), (req, res) => __awaite
 // signing user in the system
 userRouter.post('/signin', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        if (!req.body || typeof req.body !== "object" || Array.isArray(req.body)) {
+            res.status(400).json({ message: "body is required" });
+            return;
+        }
         const response = yield (0, UserController_1.LogginUserIn)(req.body.username, req.body.password);
+        res.json(response);
+    }
+    catch (error) {
+        throw new Error(`user loggin in error in user routes: ${error}`);
+    }
+}));
+userRouter.post('/signout', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        if (!req.body || typeof req.body !== "object" || Array.isArray(req.body)) {
+            res.status(400).json({ message: "body is required" });
+            return;
+        }
+        const response = yield (0, UserController_1.LoggUserout)(req.body.username);
         res.json(response);
     }
     catch (error) {

@@ -25,6 +25,10 @@ const upload = multer({ storage });
 // baby creation route
 babyRouter.post("/create", async (req: Request<{}, {}, BabyInfo>, res: Response) => {
     try {
+        if(!req.body || typeof req.body !== "object" || Array.isArray(req.body)){
+            res.status(400).json({message: "body is required"})
+            return;
+        }
         const babyData: BabyInfo = req.body;
 
         const response = await CreateBaby(babyData);
@@ -37,6 +41,10 @@ babyRouter.post("/create", async (req: Request<{}, {}, BabyInfo>, res: Response)
 
 babyRouter.post("/search", async (req: Request, res: Response) => {
     try {
+        if(!req.body || typeof req.body !== "object" || Array.isArray(req.body)){
+            res.status(400).json({message: "body is required"})
+            return;
+        }
         const searchValue = req.body.value;
         const searchField = req.body.field;
         const response = await SearchBaby(searchValue,searchField);
@@ -49,6 +57,10 @@ babyRouter.post("/search", async (req: Request, res: Response) => {
 
 babyRouter.post("/updateVisitNumber", async (req: Request, res: Response) => {
     try {
+        if(!req.body || typeof req.body !== "object" || Array.isArray(req.body)){
+            res.status(400).json({message: "body is required"})
+            return;
+        }
         const mrn = req.body.mrn;
         const visitNumber = req.body.visitNumber;
         const response = await UpdateBabyVisitNumber(visitNumber,mrn);

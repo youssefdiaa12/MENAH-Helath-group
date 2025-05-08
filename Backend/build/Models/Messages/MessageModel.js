@@ -58,9 +58,12 @@ class MessageModel {
                 const SelectMessagesQuery = `select * from public.messages where recipient_id = ($1) and id=($2)`;
                 const messages = yield connection.query(SelectMessagesQuery, [userId, messageId]);
                 if (messages.rows.length == 0) {
-                    return null;
+                    return "No Messages found";
                 }
-                const updateMessage = `update public.messages set isread=true where recipient_id = ($1) and id=($2) `;
+                if (messages.rows[0].isread) {
+                    return "Message is already read";
+                }
+                const updateMessage = `update public.messages set isread=true where recipient_id = ($1) and id=($2) returning *`;
                 const updatedmessages = yield connection.query(updateMessage, [userId, messageId]);
                 connection.release;
                 return updatedmessages.rows[0];

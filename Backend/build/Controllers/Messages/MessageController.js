@@ -81,17 +81,17 @@ const MarkAsRead = (userId, messageId) => __awaiter(void 0, void 0, void 0, func
     try {
         const MessModel = new MessageModel_1.MessageModel();
         const MessageSearchResponse = yield MessModel.MarkAsRead(userId, messageId);
-        if (MessageSearchResponse == null) {
+        if (typeof MessageSearchResponse != "string") {
             return {
-                Status: false,
-                Data: null,
-                Message: "User or message is not found "
+                Status: true,
+                Data: MessageSearchResponse,
+                Message: "Message are updated successfully"
             };
         }
         return {
-            Status: true,
-            Data: MessageSearchResponse,
-            Message: "Message are updated successfully"
+            Status: false,
+            Data: null,
+            Message: MessageSearchResponse
         };
     }
     catch (err) {

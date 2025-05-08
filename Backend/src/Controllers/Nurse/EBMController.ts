@@ -137,13 +137,13 @@ export const addVerification = async (info:verification) =>{
 
 export const verify = async (id:number, value:boolean, second_nurse:number,status:string) =>{
     try{
-        const validStatuses = ['completed', 'pending'];
+        const validStatuses = ['completed','failed'];
         const validValue = [true,false]
         if (!validStatuses.includes(status)) {
             return {
                 Status:false,
                 Data:null,
-                Message: 'Invalid status. Must be "completed" or "pending".'
+                Message: 'Invalid status. Must be "completed" or "failed".'
             }        
         }
         if (!validValue.includes(value)) {
@@ -159,6 +159,9 @@ export const verify = async (id:number, value:boolean, second_nurse:number,statu
                 Data:null,
                 Message: 'Data is missing'
             } 
+        }
+        if((value == false && status != 'failed') || (value == true && status != 'completed')){
+            return "value true is for status completed and value false is for status failed"
         }
         const verificationModel = new EBMModel();
         const verificationResult = await verificationModel.verify(id,value,second_nurse,status)

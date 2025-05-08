@@ -2,7 +2,7 @@ import express,{Request,Response} from 'express'
 import multer from 'multer';
 import path from 'path';
 import dotenv from 'dotenv'
-import {createUser,LogginUserIn} from "../../Controllers/Users/UserController"
+import {createUser,LogginUserIn,LoggUserout} from "../../Controllers/Users/UserController"
 
 dotenv.config()
 const userRouter = express()
@@ -26,6 +26,7 @@ const upload = multer({ storage });
 // signing user in the system
 userRouter.post('/signup',upload.single('profileImage'),async (req:Request,res:Response) =>{
     try{
+        
         const response = await createUser(req.body.username, req.body.firstname, req.body.lastname, req.body.mobile, `${process.env.IMAGEROUTE}${imagename}`, req.body.password, req.body.profileType)
         res.json(response)
     }
@@ -37,6 +38,10 @@ userRouter.post('/signup',upload.single('profileImage'),async (req:Request,res:R
 // signing user in the system
 userRouter.post('/signin',async (req:Request,res:Response) =>{
     try{
+        if(!req.body || typeof req.body !== "object" || Array.isArray(req.body)){
+            res.status(400).json({message: "body is required"})
+            return;
+        }
         const response = await LogginUserIn(req.body.username, req.body.password)
         res.json(response)
     }
@@ -45,5 +50,18 @@ userRouter.post('/signin',async (req:Request,res:Response) =>{
     }
 });
 
+userRouter.post('/signout',async (req:Request,res:Response) =>{
+    try{
+        if(!req.body || typeof req.body !== "object" || Array.isArray(req.body)){
+            res.status(400).json({message: "body is required"})
+            return;
+        }
+        const response = await LoggUserout(req.body.username)
+        res.json(response)
+    }
+    catch(error){
+        throw new Error(`user loggin in error in user routes: ${error}`);
+    }
+});
 
 export default userRouter

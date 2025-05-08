@@ -145,6 +145,32 @@ const addVerification = (info) => __awaiter(void 0, void 0, void 0, function* ()
 exports.addVerification = addVerification;
 const verify = (id, value, second_nurse, status) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        const validStatuses = ['completed', 'failed'];
+        const validValue = [true, false];
+        if (!validStatuses.includes(status)) {
+            return {
+                Status: false,
+                Data: null,
+                Message: 'Invalid status. Must be "completed" or "failed".'
+            };
+        }
+        if (!validValue.includes(value)) {
+            return {
+                Status: false,
+                Data: null,
+                Message: 'Invalid value. Must be true or false.'
+            };
+        }
+        if (id == null || value == null || second_nurse == null || status == null) {
+            return {
+                Status: false,
+                Data: null,
+                Message: 'Data is missing'
+            };
+        }
+        if ((value == false && status != 'failed') || (value == true && status != 'completed')) {
+            return "value true is for status completed and value false is for status failed";
+        }
         const verificationModel = new EBMModel_1.EBMModel();
         const verificationResult = yield verificationModel.verify(id, value, second_nurse, status);
         if (typeof verificationResult != "string") {

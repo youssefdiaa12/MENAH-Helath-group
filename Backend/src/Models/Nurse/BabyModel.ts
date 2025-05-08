@@ -2,13 +2,18 @@ import {BabyInfo,babyImages} from "../../Types/Nurse/BabyType";
 import client from "../../utilies/database";
 
 export class BabayModel{
-    async Create(babyData:BabyInfo): Promise<BabyInfo|null>{
+    async Create(babyData:BabyInfo): Promise<BabyInfo|string>{
         try{
             const connection = await client.connect();
             const SelectBabyQuery = 'select personal_id from public.baby where personal_id=($1) or mrn=($2)';
             console.log(SelectBabyQuery)
             const alreadyRegisterdBaby = await connection.query(SelectBabyQuery, [babyData.personal_id,babyData.mrn]);
             if(typeof alreadyRegisterdBaby.rows[0] === 'undefined'){
+                const check_mother = "select * from public.mother_info where user_id=($1)"
+                const check_mother_response = await connection.query(check_mother, [babyData.mother_id]);
+                if(check_mother_response.rows.length == 0 ){
+                    return "mother of the baby does not exist"
+                }
                 const createBabyQuery = 'INSERT INTO public.baby (name_ar, name_en, mrn, visit_number, personal_id, birth_certificate_id, date_of_birth, recorded_at, days_of_life, gestationalAge_weeks, gestationalAge_days, gestationalAge, gender, birth_weight, mother_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14,$15) RETURNING *';
                 const BabyCreation = await connection.query(createBabyQuery,
                     [
@@ -26,13 +31,13 @@ export class BabayModel{
                         babyData.gestational_age_total,
                         babyData.gender,
                         babyData.birth_weight,
-                        babyData.mother_id
+                        check_mother_response.rows[0].mother_mrn
                     ]);
                 connection.release;
                 return BabyCreation.rows[0]
             }
             else{    
-                return null;
+                return "baby is already registered in the system";
             }
         }
         catch(error){

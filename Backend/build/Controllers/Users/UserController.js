@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LogginUserIn = exports.createUser = void 0;
+exports.LoggUserout = exports.LogginUserIn = exports.createUser = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const UsersModel_1 = require("../../Models/Users/UsersModel");
 const dotenv_1 = __importDefault(require("dotenv"));
@@ -118,3 +118,31 @@ const LogginUserIn = (username, password) => __awaiter(void 0, void 0, void 0, f
     }
 });
 exports.LogginUserIn = LogginUserIn;
+const LoggUserout = (username) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        if (username == null || username == '') {
+            return "username is required";
+        }
+        if (typeof username != "string") {
+            return "username must be string";
+        }
+        const usermodel = new UsersModel_1.userModel();
+        const result = yield usermodel.logout(username);
+        if (typeof result != "string") {
+            return {
+                Status: true,
+                Data: null,
+                Message: "user logged out successfully"
+            };
+        }
+        return {
+            Status: false,
+            Data: null,
+            Message: result
+        };
+    }
+    catch (error) {
+        throw new Error(`error in loggin user out in user contoller: ${error}`);
+    }
+});
+exports.LoggUserout = LoggUserout;

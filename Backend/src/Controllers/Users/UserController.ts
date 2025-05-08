@@ -111,3 +111,31 @@ export const LogginUserIn = async(username:string,password:string):Promise<respo
         throw new Error(`error in creating user account in user contoller: ${error}`);
     }
 }
+
+export const LoggUserout = async(username:string):Promise<response|string> =>{
+    try{
+        if(username == null || username==''){
+            return "username is required";
+        }
+        if(typeof username != "string"){
+            return "username must be string"
+        }
+        const usermodel:userModel = new userModel();
+        const result = await usermodel.logout(username);
+        if(typeof result != "string"){
+            return {
+                Status:true,
+                Data:null,
+                Message: "user logged out successfully"
+            } 
+        }
+        return {
+            Status:false,
+            Data:null,
+            Message: (result as string) 
+        } 
+    }
+    catch(error){
+        throw new Error(`error in loggin user out in user contoller: ${error}`);
+    }
+}
