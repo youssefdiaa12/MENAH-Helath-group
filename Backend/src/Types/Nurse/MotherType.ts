@@ -11,6 +11,13 @@ export type motherinfo = {
     type_of_delivery :string,
     user_id :number
 }
+export type MotherImages = {
+    id :number,
+    url :string,
+    category :string,
+    baby_id :string,
+}
+
 const allowedTypes = [
     "Normal Vaginal Delivery (NVD)",
     "Assisted Vaginal Delivery (AVD)",

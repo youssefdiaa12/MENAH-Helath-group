@@ -34,6 +34,10 @@ const upload = (0, multer_1.default)({ storage });
 // baby creation route
 babyRouter.post("/create", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        if (!req.body || typeof req.body !== "object" || Array.isArray(req.body)) {
+            res.status(400).json({ message: "body is required" });
+            return;
+        }
         const babyData = req.body;
         const response = yield (0, BabyController_1.CreateBaby)(babyData);
         res.json(response);
@@ -45,6 +49,10 @@ babyRouter.post("/create", (req, res) => __awaiter(void 0, void 0, void 0, funct
 }));
 babyRouter.post("/search", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        if (!req.body || typeof req.body !== "object" || Array.isArray(req.body)) {
+            res.status(400).json({ message: "body is required" });
+            return;
+        }
         const searchValue = req.body.value;
         const searchField = req.body.field;
         const response = yield (0, BabyController_1.SearchBaby)(searchValue, searchField);
@@ -57,6 +65,10 @@ babyRouter.post("/search", (req, res) => __awaiter(void 0, void 0, void 0, funct
 }));
 babyRouter.post("/updateVisitNumber", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        if (!req.body || typeof req.body !== "object" || Array.isArray(req.body)) {
+            res.status(400).json({ message: "body is required" });
+            return;
+        }
         const mrn = req.body.mrn;
         const visitNumber = req.body.visitNumber;
         const response = yield (0, BabyController_1.UpdateBabyVisitNumber)(visitNumber, mrn);
@@ -69,6 +81,11 @@ babyRouter.post("/updateVisitNumber", (req, res) => __awaiter(void 0, void 0, vo
 }));
 babyRouter.post('/savePhoto', upload.single('image'), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        if (!req.body || typeof req.body !== "object" || Array.isArray(req.body)) {
+            res.status(400).json({ message: "body is required" });
+            return;
+        }
+        console.log(imagename);
         const response = yield (0, BabyController_1.SaveBabyPhoto)(req.body.mrn, `${process.env.BABYIMAGE}${imagename}`, req.body.category);
         res.json(response);
     }

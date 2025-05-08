@@ -1,5 +1,5 @@
 import client from "../../utilies/database";
-import {motherinfo} from "../../Types/Nurse/MotherType"
+import {motherinfo,MotherImages} from "../../Types/Nurse/MotherType"
 
 
 
@@ -42,6 +42,25 @@ export class MotherModel{
         }
         catch(error){
             throw new Error(`mother selection error in mother models: ${error}`);
+        }
+    }
+    async SaveMotherPhoto(mrn:string,url:string,category:string): Promise<MotherImages|null>{
+        try{
+            const connection = await client.connect();
+            const SelectMotherQuery = 'select * from public.mother_info where mother_mrn=($1)';
+            const alreadyRegisterdMother = await connection.query(SelectMotherQuery, [mrn]);
+            if(typeof alreadyRegisterdMother.rows[0] != 'undefined'){
+                const saveImageQuery = 'insert into public.motherImages (url,category,mother_id) values ($1,$2,$3) returning *'
+                const response = await connection.query(saveImageQuery,[url,category,mrn]);
+                connection.release;
+                return response.rows[0]
+            }
+            else{    
+                return null;
+            }
+        }
+        catch(error){
+            throw new Error(`mother image saving error in mother models: ${error}`);
         }
     }
 

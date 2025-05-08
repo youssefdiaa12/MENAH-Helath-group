@@ -1,15 +1,23 @@
 import {response} from "../../Types/Response"
-import {ebmInfo,BottleUsageInfo} from "../../Types/Nurse/EBMType";
+import {ebmInfo,BottleUsageInfo,validateEbmInfo,validateBottleUsageInfo} from "../../Types/Nurse/EBMType";
 import {EBMModel} from "../../Models/Nurse/EBMModel"
-import {verification} from "../../Types/Nurse/VerificationType"
+import {verification,validateVerification} from "../../Types/Nurse/VerificationType"
 import { stat } from "fs";
 
 
 export const CreateBottle = async (EBMData:ebmInfo ) :Promise<response|string> =>{
     try{
+        const result = validateEbmInfo(EBMData)
+        if(!result.isValid){
+            return {
+                Status:false,
+                Data:null,
+                Message: result.message
+            } 
+        }
         const ebmModel = new EBMModel();
         const ebmCreationResponse = await ebmModel.Create(EBMData)
-        if(ebmCreationResponse){         
+        if(typeof ebmCreationResponse != "string"){         
             return {
                 Status:true,
                 Data:ebmCreationResponse,
@@ -19,7 +27,7 @@ export const CreateBottle = async (EBMData:ebmInfo ) :Promise<response|string> =
         return {
             Status:false,
             Data:null,
-            Message: "Error while Creating bottle"
+            Message: ebmCreationResponse
         } 
     }
     catch(err){
@@ -51,6 +59,14 @@ export const SelectAllBottles = async () =>{
 
 export const SelectBottle = async (id:string) =>{
     try{
+        if (typeof id != "string" || !id.trim()){
+            return {
+                Status:false,
+                Data:null,
+                Message: "id must be a non-empty string." 
+            } 
+    
+        }
         const ebmModel = new EBMModel();
         const ebmSearchResult = await ebmModel.SelectBottle(id)
         if(ebmSearchResult){
@@ -93,9 +109,17 @@ export const SelectBottleUsage = async () =>{
 }
 export const UseBottle = async (info:BottleUsageInfo) =>{
     try{
+        const result = validateBottleUsageInfo(info)
+        if(!result.isValid){
+            return {
+                Status:false,
+                Data:null,
+                Message: result.message
+            }
+        }
         const ebmModel = new EBMModel();
         const ebmUsageResult = await ebmModel.CreateBottleUsage(info.bottle_id,info.total_volume,info.total_volume_used,info.total_volume_discarded,info.date_of_usage)
-        if(ebmUsageResult){
+        if(typeof ebmUsageResult != "string"){
             return {
                 Status:true,
                 Data: ebmUsageResult,
@@ -115,6 +139,14 @@ export const UseBottle = async (info:BottleUsageInfo) =>{
 
 export const addVerification = async (info:verification) =>{
     try{
+        const result = validateVerification(info);
+        if(!result.isValid){
+            return {
+                Status:false,
+                Data:null,
+                Message: result.message
+            }
+        }
         const verificationModel = new EBMModel();
         const verificationResult = await verificationModel.AddVerification(info)
         if(typeof verificationResult != "string"){

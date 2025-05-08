@@ -20,7 +20,8 @@ class MotherModel {
             try {
                 const connection = yield database_1.default.connect();
                 const SelectMotherQuery = `select * from public.users where id =($1) and isactive=true`;
-                const mother = yield connection.query(SelectMotherQuery, [mothetData.id]);
+                const mother = yield connection.query(SelectMotherQuery, [mothetData.user_id]);
+                console.log(mother);
                 if (mother.rows.length == 0) {
                     return "Mother Must be registered to the system first and her account is activated by the admin";
                 }
@@ -55,6 +56,27 @@ class MotherModel {
             }
             catch (error) {
                 throw new Error(`mother selection error in mother models: ${error}`);
+            }
+        });
+    }
+    SaveMotherPhoto(mrn, url, category) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const connection = yield database_1.default.connect();
+                const SelectMotherQuery = 'select * from public.mother_info where mother_mrn=($1)';
+                const alreadyRegisterdMother = yield connection.query(SelectMotherQuery, [mrn]);
+                if (typeof alreadyRegisterdMother.rows[0] != 'undefined') {
+                    const saveImageQuery = 'insert into public.motherImages (url,category,mother_id) values ($1,$2,$3) returning *';
+                    const response = yield connection.query(saveImageQuery, [url, category, mrn]);
+                    connection.release;
+                    return response.rows[0];
+                }
+                else {
+                    return null;
+                }
+            }
+            catch (error) {
+                throw new Error(`mother image saving error in mother models: ${error}`);
             }
         });
     }

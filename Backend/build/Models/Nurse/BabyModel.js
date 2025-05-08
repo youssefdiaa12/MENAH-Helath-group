@@ -23,6 +23,11 @@ class BabayModel {
                 console.log(SelectBabyQuery);
                 const alreadyRegisterdBaby = yield connection.query(SelectBabyQuery, [babyData.personal_id, babyData.mrn]);
                 if (typeof alreadyRegisterdBaby.rows[0] === 'undefined') {
+                    const check_mother = "select * from public.mother_info where user_id=($1)";
+                    const check_mother_response = yield connection.query(check_mother, [babyData.mother_id]);
+                    if (check_mother_response.rows.length == 0) {
+                        return "mother of the baby does not exist";
+                    }
                     const createBabyQuery = 'INSERT INTO public.baby (name_ar, name_en, mrn, visit_number, personal_id, birth_certificate_id, date_of_birth, recorded_at, days_of_life, gestationalAge_weeks, gestationalAge_days, gestationalAge, gender, birth_weight, mother_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14,$15) RETURNING *';
                     const BabyCreation = yield connection.query(createBabyQuery, [
                         babyData.name_ar,
@@ -39,13 +44,13 @@ class BabayModel {
                         babyData.gestational_age_total,
                         babyData.gender,
                         babyData.birth_weight,
-                        babyData.mother_id
+                        check_mother_response.rows[0].mother_mrn
                     ]);
                     connection.release;
                     return BabyCreation.rows[0];
                 }
                 else {
-                    return null;
+                    return "baby is already registered in the system";
                 }
             }
             catch (error) {

@@ -9,6 +9,10 @@ const EBMRouter = express()
 
 EBMRouter.post("/create", async (req: Request<{}, {}, ebmInfo>, res: Response) => {
     try {
+        if(!req.body || typeof req.body !== "object" || Array.isArray(req.body)){
+            res.status(400).json({message: "body is required"})
+            return;
+        }
         const ebmData: ebmInfo = req.body;
 
         const response = await CreateBottle(ebmData);
@@ -21,6 +25,10 @@ EBMRouter.post("/create", async (req: Request<{}, {}, ebmInfo>, res: Response) =
 
 EBMRouter.post("/selectBottle", async (req: Request, res: Response) => {
     try {
+        if(!req.body || typeof req.body !== "object" || Array.isArray(req.body)){
+            res.status(400).json({message: "body is required"})
+            return;
+        }
         const response = await SelectBottle(req.body.id);
         res.json(response);
     } catch (error) {
@@ -53,6 +61,10 @@ EBMRouter.get("/selectUsage", async (req:Request , res: Response) => {
 
 EBMRouter.post("/use", async (req: Request<{}, {}, BottleUsageInfo>, res: Response) => {
     try {
+        if(!req.body || typeof req.body !== "object" || Array.isArray(req.body)){
+            res.status(400).json({message: "body is required"})
+            return;
+        }
         const ebmData: BottleUsageInfo = req.body;
 
         const response = await UseBottle(ebmData);
@@ -65,6 +77,10 @@ EBMRouter.post("/use", async (req: Request<{}, {}, BottleUsageInfo>, res: Respon
 
 EBMRouter.post("/addVerification", async (req: Request<{}, {}, verification>, res: Response) => {
     try {
+        if(!req.body || typeof req.body !== "object" || Array.isArray(req.body)){
+            res.status(400).json({message: "body is required"})
+            return;
+        }
         const verificationData: verification = req.body;
 
         const response = await addVerification(verificationData);
@@ -78,6 +94,10 @@ EBMRouter.post("/addVerification", async (req: Request<{}, {}, verification>, re
 
 EBMRouter.post("/verify", async (req: Request, res: Response)  => {
     try {
+        if(!req.body || typeof req.body !== "object" || Array.isArray(req.body)){
+            res.status(400).json({message: "body is required"})
+            return;
+        }
         const response = await verify(req.body.id,req.body.value,req.body.second_nurse,req.body.status);
         res.json(response);
     } catch (error) {

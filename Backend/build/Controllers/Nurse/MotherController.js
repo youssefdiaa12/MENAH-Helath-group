@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AddMotherInfo = void 0;
+exports.SaveMotherPhoto = exports.AddMotherInfo = void 0;
 const MotherType_1 = require("../../Types/Nurse/MotherType");
 const MotherModel_1 = require("../../Models/Nurse/MotherModel");
 const AddMotherInfo = (motherInfo) => __awaiter(void 0, void 0, void 0, function* () {
@@ -20,7 +20,7 @@ const AddMotherInfo = (motherInfo) => __awaiter(void 0, void 0, void 0, function
         }
         const motherModel = new MotherModel_1.MotherModel();
         const motherResponse = yield motherModel.Create(motherInfo);
-        if (motherResponse) {
+        if (typeof motherResponse != "string") {
             return {
                 Status: true,
                 Data: motherResponse,
@@ -30,7 +30,7 @@ const AddMotherInfo = (motherInfo) => __awaiter(void 0, void 0, void 0, function
         return {
             Status: false,
             Data: null,
-            Message: "Error while adding mother info"
+            Message: motherResponse
         };
     }
     catch (err) {
@@ -38,3 +38,60 @@ const AddMotherInfo = (motherInfo) => __awaiter(void 0, void 0, void 0, function
     }
 });
 exports.AddMotherInfo = AddMotherInfo;
+const SaveMotherPhoto = (mrn, url, category) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        if (typeof mrn != "string" || !mrn.trim()) {
+            return {
+                Status: false,
+                Data: null,
+                Message: "Baby's mrn must be a non-empty string."
+            };
+        }
+        if (mrn.length != 12) {
+            return {
+                Status: false,
+                Data: null,
+                Message: "Baby's mrn must be a non-empty string."
+            };
+        }
+        if (typeof url != "string" || !url.trim()) {
+            return {
+                Status: false,
+                Data: null,
+                Message: "url must be a non-empty string."
+            };
+        }
+        if (typeof category != "string" || !category.trim()) {
+            return {
+                Status: false,
+                Data: null,
+                Message: "category must be a non-empty string."
+            };
+        }
+        if (mrn.length != 12) {
+            return {
+                Status: false,
+                Data: null,
+                Message: "Baby's mrn must be string of length 12"
+            };
+        }
+        const motherModel = new MotherModel_1.MotherModel();
+        const MotherPhotoSaving = yield motherModel.SaveMotherPhoto(mrn, url, category);
+        if (MotherPhotoSaving) {
+            return {
+                Status: true,
+                Data: MotherPhotoSaving,
+                Message: `Mother ${category} photo is saved successfully`
+            };
+        }
+        return {
+            Status: false,
+            Data: null,
+            Message: "Mother not found!"
+        };
+    }
+    catch (err) {
+        throw new Error(`error in saving Mother photo in mother contoller: ${err}`);
+    }
+});
+exports.SaveMotherPhoto = SaveMotherPhoto;

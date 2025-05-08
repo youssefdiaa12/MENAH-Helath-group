@@ -17,6 +17,10 @@ const EBMController_1 = require("../../Controllers/Nurse/EBMController");
 const EBMRouter = (0, express_1.default)();
 EBMRouter.post("/create", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        if (!req.body || typeof req.body !== "object" || Array.isArray(req.body)) {
+            res.status(400).json({ message: "body is required" });
+            return;
+        }
         const ebmData = req.body;
         const response = yield (0, EBMController_1.CreateBottle)(ebmData);
         res.json(response);
@@ -28,6 +32,10 @@ EBMRouter.post("/create", (req, res) => __awaiter(void 0, void 0, void 0, functi
 }));
 EBMRouter.post("/selectBottle", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        if (!req.body || typeof req.body !== "object" || Array.isArray(req.body)) {
+            res.status(400).json({ message: "body is required" });
+            return;
+        }
         const response = yield (0, EBMController_1.SelectBottle)(req.body.id);
         res.json(response);
     }
@@ -58,6 +66,10 @@ EBMRouter.get("/selectUsage", (req, res) => __awaiter(void 0, void 0, void 0, fu
 }));
 EBMRouter.post("/use", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        if (!req.body || typeof req.body !== "object" || Array.isArray(req.body)) {
+            res.status(400).json({ message: "body is required" });
+            return;
+        }
         const ebmData = req.body;
         const response = yield (0, EBMController_1.UseBottle)(ebmData);
         res.json(response);
@@ -69,6 +81,10 @@ EBMRouter.post("/use", (req, res) => __awaiter(void 0, void 0, void 0, function*
 }));
 EBMRouter.post("/addVerification", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        if (!req.body || typeof req.body !== "object" || Array.isArray(req.body)) {
+            res.status(400).json({ message: "body is required" });
+            return;
+        }
         const verificationData = req.body;
         const response = yield (0, EBMController_1.addVerification)(verificationData);
         res.json(response);
@@ -80,6 +96,10 @@ EBMRouter.post("/addVerification", (req, res) => __awaiter(void 0, void 0, void 
 }));
 EBMRouter.post("/verify", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        if (!req.body || typeof req.body !== "object" || Array.isArray(req.body)) {
+            res.status(400).json({ message: "body is required" });
+            return;
+        }
         const response = yield (0, EBMController_1.verify)(req.body.id, req.body.value, req.body.second_nurse, req.body.status);
         res.json(response);
     }

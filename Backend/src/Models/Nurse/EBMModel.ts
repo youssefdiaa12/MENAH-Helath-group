@@ -3,16 +3,21 @@ import client from "../../utilies/database";
 import {verification} from "../../Types/Nurse/VerificationType"
 
 export class EBMModel{
-    async Create(ebmData:ebmInfo): Promise<ebmInfo|null>{
+    async Create(ebmData:ebmInfo): Promise<ebmInfo|string>{
         try{
             const connection = await client.connect();
             const SelectbottleQuery = `select * from public.bottle where order_number =($1)`;
             const bottles = await connection.query(SelectbottleQuery,[ebmData.order]);
             if(bottles.rows.length > 0){
-                return null;
+                return "this bottle with this id is already registered";
+            }
+            const mother = 'select * from public.mother_info where user_id=($1)';
+            const executeMother = await connection.query(mother,[ebmData.mother_id])
+            if(executeMother.rows.length ==0){
+                return "Mother does not exist"
             }
             const EMPQuery = 'INSERT INTO public.bottle (order_number, date_of_expression, date_of_delivery, volume,mother_id) values ($1,$2,$3,$4,$5) returning *';
-            const EMPResponse = await connection.query(EMPQuery, [ebmData.order,ebmData.date_of_expression,ebmData.date_of_delivery,ebmData.volume, ebmData.mother_id ]);
+            const EMPResponse = await connection.query(EMPQuery, [ebmData.order,ebmData.date_of_expression,ebmData.date_of_delivery,ebmData.volume, executeMother.rows[0].mother_mrn]);
             connection.release;
             return EMPResponse.rows[0]
         }
@@ -75,9 +80,6 @@ export class EBMModel{
     }
     async CreateBottleUsage(bottle_id:number,total_volume:number,total_volume_used:number,total_volume_discarded:number,date_of_usage:Date): Promise<BottleUsageInfo|string>{
         try{
-            if (!bottle_id) {
-                return "bottle id is required";
-            }
             const connection = await client.connect();
             const SelectebmQuery = `select * from public.bottle where order_number =($1)`;
             const ebm = await connection.query(SelectebmQuery,[bottle_id]);

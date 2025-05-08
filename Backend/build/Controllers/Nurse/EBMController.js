@@ -10,12 +10,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.verify = exports.addVerification = exports.UseBottle = exports.SelectBottleUsage = exports.SelectBottle = exports.SelectAllBottles = exports.CreateBottle = void 0;
+const EBMType_1 = require("../../Types/Nurse/EBMType");
 const EBMModel_1 = require("../../Models/Nurse/EBMModel");
+const VerificationType_1 = require("../../Types/Nurse/VerificationType");
 const CreateBottle = (EBMData) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        const result = (0, EBMType_1.validateEbmInfo)(EBMData);
+        if (!result.isValid) {
+            return {
+                Status: false,
+                Data: null,
+                Message: result.message
+            };
+        }
         const ebmModel = new EBMModel_1.EBMModel();
         const ebmCreationResponse = yield ebmModel.Create(EBMData);
-        if (ebmCreationResponse) {
+        if (typeof ebmCreationResponse != "string") {
             return {
                 Status: true,
                 Data: ebmCreationResponse,
@@ -25,7 +35,7 @@ const CreateBottle = (EBMData) => __awaiter(void 0, void 0, void 0, function* ()
         return {
             Status: false,
             Data: null,
-            Message: "Error while Creating bottle"
+            Message: ebmCreationResponse
         };
     }
     catch (err) {
@@ -57,6 +67,13 @@ const SelectAllBottles = () => __awaiter(void 0, void 0, void 0, function* () {
 exports.SelectAllBottles = SelectAllBottles;
 const SelectBottle = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        if (typeof id != "string" || !id.trim()) {
+            return {
+                Status: false,
+                Data: null,
+                Message: "id must be a non-empty string."
+            };
+        }
         const ebmModel = new EBMModel_1.EBMModel();
         const ebmSearchResult = yield ebmModel.SelectBottle(id);
         if (ebmSearchResult) {
@@ -101,9 +118,17 @@ const SelectBottleUsage = () => __awaiter(void 0, void 0, void 0, function* () {
 exports.SelectBottleUsage = SelectBottleUsage;
 const UseBottle = (info) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        const result = (0, EBMType_1.validateBottleUsageInfo)(info);
+        if (!result.isValid) {
+            return {
+                Status: false,
+                Data: null,
+                Message: result.message
+            };
+        }
         const ebmModel = new EBMModel_1.EBMModel();
         const ebmUsageResult = yield ebmModel.CreateBottleUsage(info.bottle_id, info.total_volume, info.total_volume_used, info.total_volume_discarded, info.date_of_usage);
-        if (ebmUsageResult) {
+        if (typeof ebmUsageResult != "string") {
             return {
                 Status: true,
                 Data: ebmUsageResult,
@@ -123,6 +148,14 @@ const UseBottle = (info) => __awaiter(void 0, void 0, void 0, function* () {
 exports.UseBottle = UseBottle;
 const addVerification = (info) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        const result = (0, VerificationType_1.validateVerification)(info);
+        if (!result.isValid) {
+            return {
+                Status: false,
+                Data: null,
+                Message: result.message
+            };
+        }
         const verificationModel = new EBMModel_1.EBMModel();
         const verificationResult = yield verificationModel.AddVerification(info);
         if (typeof verificationResult != "string") {

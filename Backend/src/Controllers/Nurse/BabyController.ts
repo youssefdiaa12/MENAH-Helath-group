@@ -138,23 +138,43 @@ export const UpdateBabyVisitNumber = async (visitNumber:number, mrn:string) =>{
 export const SaveBabyPhoto = async (mrn:string,url:string,category:string) =>{
     try{
         if (typeof mrn != "string" || !mrn.trim()){
-            return { isValid: false, message: "Baby's mrn must be a non-empty string." };
+            return {
+                Status:false,
+                Data:null,
+                Message: "Baby's mrn must be a non-empty string." 
+            } 
     
         }
         if (mrn.length != 12){
-            return { isValid: false, message: "Baby's mrn must be a non-empty string." };
+            return {
+                Status:false,
+                Data:null,
+                Message: "Baby's mrn must be a non-empty string."
+            } 
     
         }
         if (typeof url != "string" || !url.trim()){
-            return { isValid: false, message: "url must be a non-empty string." };
+            return {
+                Status:false,
+                Data:null,
+                Message:  "url must be a non-empty string." 
+            }
     
         }
         if (typeof category != "string" || !category.trim()){
-            return { isValid: false, message: "category must be a non-empty string." };
+            return {
+                Status:false,
+                Data:null,
+                Message:  "category must be a non-empty string." 
+            }
     
         }
         if(mrn.length != 12){
-            return { isValid: false, message: "Baby's mrn must be string of length 12" };
+            return {
+                Status:false,
+                Data:null,
+                Message:  "Baby's mrn must be string of length 12"
+            }
         }
         const babyModel = new BabayModel();
         const babyPhotoSaving = await babyModel.SaveBabyPhoto(mrn,url,category)

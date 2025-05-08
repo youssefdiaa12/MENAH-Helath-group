@@ -27,3 +27,64 @@ export const AddMotherInfo = async (motherInfo:motherinfo ) :Promise<response|st
         throw new Error(`error in adding mother info in mother contoller: ${err}`);
     }
 }
+
+export const SaveMotherPhoto = async (mrn:string,url:string,category:string) =>{
+    try{
+        if (typeof mrn != "string" || !mrn.trim()){
+            return {
+                Status:false,
+                Data:null,
+                Message: "Baby's mrn must be a non-empty string." 
+            } 
+    
+        }
+        if (mrn.length != 12){
+            return {
+                Status:false,
+                Data:null,
+                Message: "Baby's mrn must be a non-empty string."
+            } 
+    
+        }
+        if (typeof url != "string" || !url.trim()){
+            return {
+                Status:false,
+                Data:null,
+                Message:  "url must be a non-empty string." 
+            }
+    
+        }
+        if (typeof category != "string" || !category.trim()){
+            return {
+                Status:false,
+                Data:null,
+                Message:  "category must be a non-empty string." 
+            }
+    
+        }
+        if(mrn.length != 12){
+            return {
+                Status:false,
+                Data:null,
+                Message:  "Baby's mrn must be string of length 12"
+            }
+        }
+        const motherModel = new MotherModel();
+        const MotherPhotoSaving = await motherModel.SaveMotherPhoto(mrn,url,category)
+        if(MotherPhotoSaving){
+            return {
+                Status:true,
+                Data:MotherPhotoSaving,
+                Message: `Mother ${category} photo is saved successfully`
+            } 
+        }
+        return {
+            Status:false,
+            Data:null,
+            Message: "Mother not found!"
+        } 
+    }
+    catch(err){
+        throw new Error(`error in saving Mother photo in mother contoller: ${err}`);
+    }
+}

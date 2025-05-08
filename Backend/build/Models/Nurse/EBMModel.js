@@ -22,10 +22,15 @@ class EBMModel {
                 const SelectbottleQuery = `select * from public.bottle where order_number =($1)`;
                 const bottles = yield connection.query(SelectbottleQuery, [ebmData.order]);
                 if (bottles.rows.length > 0) {
-                    return null;
+                    return "this bottle with this id is already registered";
+                }
+                const mother = 'select * from public.mother_info where user_id=($1)';
+                const executeMother = yield connection.query(mother, [ebmData.mother_id]);
+                if (executeMother.rows.length == 0) {
+                    return "Mother does not exist";
                 }
                 const EMPQuery = 'INSERT INTO public.bottle (order_number, date_of_expression, date_of_delivery, volume,mother_id) values ($1,$2,$3,$4,$5) returning *';
-                const EMPResponse = yield connection.query(EMPQuery, [ebmData.order, ebmData.date_of_expression, ebmData.date_of_delivery, ebmData.volume, ebmData.mother_id]);
+                const EMPResponse = yield connection.query(EMPQuery, [ebmData.order, ebmData.date_of_expression, ebmData.date_of_delivery, ebmData.volume, executeMother.rows[0].mother_mrn]);
                 connection.release;
                 return EMPResponse.rows[0];
             }
@@ -91,9 +96,6 @@ class EBMModel {
     CreateBottleUsage(bottle_id, total_volume, total_volume_used, total_volume_discarded, date_of_usage) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                if (!bottle_id) {
-                    return "bottle id is required";
-                }
                 const connection = yield database_1.default.connect();
                 const SelectebmQuery = `select * from public.bottle where order_number =($1)`;
                 const ebm = yield connection.query(SelectebmQuery, [bottle_id]);

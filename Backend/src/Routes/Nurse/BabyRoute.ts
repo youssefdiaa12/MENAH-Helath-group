@@ -73,7 +73,11 @@ babyRouter.post("/updateVisitNumber", async (req: Request, res: Response) => {
 
 babyRouter.post('/savePhoto',upload.single('image'),async (req:Request,res:Response) =>{
     try{
-
+        if(!req.body || typeof req.body !== "object" || Array.isArray(req.body)){
+            res.status(400).json({message: "body is required"})
+            return;
+        }
+        console.log(imagename)
         const response = await SaveBabyPhoto(req.body.mrn, `${process.env.BABYIMAGE}${imagename}`, req.body.category)
         res.json(response)
     }
