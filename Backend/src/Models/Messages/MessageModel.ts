@@ -8,6 +8,9 @@ export class MessageModel{
             const connection = await client.connect();
             const SelectUserQuery = `select * from public.users where id =($1) or id = ($2)`;
             const users = await connection.query(SelectUserQuery,[messInfo.sender_id,messInfo.recipient_id]);
+            if(users.rows[0].profiletype == 'user' && users.rows[1].profiletype == 'user'){
+                return "parent can not send message to another parent"
+            }
             if(users.rows.length != 2){
                 return "sender or reciever is not found";
             }
