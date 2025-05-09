@@ -9,6 +9,10 @@ const MessageRouter = express()
 
 MessageRouter.post("/create", async (req: Request<{}, {}, message>, res: Response) => {
     try {
+        if(!req.body || typeof req.body !== "object" || Array.isArray(req.body)){
+            res.status(400).json({message: "body is required"})
+            return;
+        }
         const messData: message = req.body;
 
         const response = await CreateMessage(messData);
@@ -21,6 +25,10 @@ MessageRouter.post("/create", async (req: Request<{}, {}, message>, res: Respons
 
 MessageRouter.post("/sent", async (req: Request, res: Response) => {
     try {
+        if(!req.body || typeof req.body !== "object" || Array.isArray(req.body)){
+            res.status(400).json({message: "body is required"})
+            return;
+        }
         const id = req.body.id;
 
         const response = await SelectMySentMessages(id);
@@ -33,6 +41,10 @@ MessageRouter.post("/sent", async (req: Request, res: Response) => {
 
 MessageRouter.post("/markAsRead", async (req: Request, res: Response) => {
     try {
+        if(!req.body || typeof req.body !== "object" || Array.isArray(req.body)){
+            res.status(400).json({message: "body is required"})
+            return;
+        }
         const userId = req.body.userId;
         const messageId = req.body.id;
         const response = await MarkAsRead(userId,messageId);
@@ -45,6 +57,10 @@ MessageRouter.post("/markAsRead", async (req: Request, res: Response) => {
 
 MessageRouter.post("/recievings", async (req: Request, res: Response) => {
     try {
+        if(!req.body || typeof req.body !== "object" || Array.isArray(req.body)){
+            res.status(400).json({message: "body is required"})
+            return;
+        }
         const id = req.body.id;
 
         const response = await SelectMyrecieverMessages(id);
