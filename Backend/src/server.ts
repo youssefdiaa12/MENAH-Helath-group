@@ -32,6 +32,10 @@ app.use("/admin",validateMiddleWare,IsAdminValidation,AdminRouter)
 app.use("/mother",validateMiddleWare,IsNurseValidation ,motherRouter)
 app.use("/parent",validateMiddleWare,IsParentValidation,ParentRouter)
 app.use("/all",validateMiddleWare,HistoryRouter)
+
+app.get('/health', (req, res) => {
+    res.sendStatus(200);
+  });
 app.listen(port,()=>{
     console.log(`server started at http://localhost:${port}`)
 });

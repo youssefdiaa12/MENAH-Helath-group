@@ -34,6 +34,9 @@ app.use("/admin", Authentication_1.validateMiddleWare, isAdmin_1.IsAdminValidati
 app.use("/mother", Authentication_1.validateMiddleWare, isNurse_1.IsNurseValidation, MotherRouter_1.default);
 app.use("/parent", Authentication_1.validateMiddleWare, isParent_1.IsParentValidation, ParentsRoute_1.default);
 app.use("/all", Authentication_1.validateMiddleWare, CommonRouter_1.default);
+app.get('/health', (req, res) => {
+    res.sendStatus(200);
+});
 app.listen(port, () => {
     console.log(`server started at http://localhost:${port}`);
 });

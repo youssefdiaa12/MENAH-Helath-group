@@ -65,11 +65,11 @@ userRouter.post('/signup', upload.single('profileImage'), (req, res) => __awaite
             res.status(400).json({ message: "profileType is required" });
             return;
         }
-        if (!image) {
-            res.status(400).json({ message: "image is required" });
+        if (profileType != "user" && profileType != "admin" && profileType != "nurse") {
+            res.status(400).json({ message: "profileType must be user or admin or nurse" });
             return;
         }
-        if (imageExtension != '.png' && imageExtension != '.jpg' && imageExtension != '.jpeg') {
+        if (imageExtension != '.png' && imageExtension != '.jpg' && imageExtension != '.jpeg' && image) {
             res.status(400).json({ message: "Only .png, .jpg, and .jpeg formats are allowed" });
             return;
         }
