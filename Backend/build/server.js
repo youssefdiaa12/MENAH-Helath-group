@@ -10,10 +10,12 @@ const ImageRouter_1 = __importDefault(require("./Routes/Users/ImageRouter"));
 const Authentication_1 = require("./MiddleWares/Authentication");
 const isAdmin_1 = require("./MiddleWares/isAdmin");
 const isNurse_1 = require("./MiddleWares/isNurse");
+const isParent_1 = require("./MiddleWares/isParent");
 const MotherRouter_1 = __importDefault(require("./Routes/Nurse/MotherRouter"));
 const EBMRoute_1 = __importDefault(require("./Routes/Nurse/EBMRoute"));
 const MessagesRoute_1 = __importDefault(require("./Routes/Messages/MessagesRoute"));
 const AdminRoute_1 = __importDefault(require("./Routes/Admins/AdminRoute"));
+const ParentsRoute_1 = __importDefault(require("./Routes/Parents/ParentsRoute"));
 const BabyRoute_1 = __importDefault(require("./Routes/Nurse/BabyRoute"));
 const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
@@ -29,6 +31,7 @@ app.use("/bottle", Authentication_1.validateMiddleWare, isNurse_1.IsNurseValidat
 app.use("/message", Authentication_1.validateMiddleWare, MessagesRoute_1.default);
 app.use("/admin", Authentication_1.validateMiddleWare, isAdmin_1.IsAdminValidation, AdminRoute_1.default);
 app.use("/mother", Authentication_1.validateMiddleWare, isNurse_1.IsNurseValidation, MotherRouter_1.default);
+app.use("/parent", Authentication_1.validateMiddleWare, isParent_1.IsParentValidation, ParentsRoute_1.default);
 app.listen(port, () => {
     console.log(`server started at http://localhost:${port}`);
 });

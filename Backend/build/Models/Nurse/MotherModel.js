@@ -30,6 +30,11 @@ class MotherModel {
                 if (duplicateResponse.rows.length == 1) {
                     return "This Mother is already added by another Nurse.";
                 }
+                const duplicateMotherMrn = "select * from public.mother_info where mother_mrn = ($1)";
+                const duplicatemrnResponse = yield connection.query(duplicateMotherMrn, [mothetData.mother_mrn]);
+                if (duplicatemrnResponse.rows.length > 0) {
+                    return "This Mother is mrn already used, choose another mrn.";
+                }
                 const InsertMotherQuery = 'INSERT INTO public.mother_info (mother_mrn, mother_name_en, mother_name_ar, mother_age,gravida,para, abortion, date_of_delivery, type_of_delivery,user_id) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) returning *';
                 const Response = yield connection.query(InsertMotherQuery, [mothetData.mother_mrn, mothetData.mother_name_en, mothetData.mother_name_ar, mothetData.mother_age, mothetData.gravida, mothetData.para, mothetData.abortion, mothetData.date_of_delivery, mothetData.type_of_delivery, mothetData.user_id]);
                 connection.release;

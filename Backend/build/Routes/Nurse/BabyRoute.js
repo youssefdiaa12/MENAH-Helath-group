@@ -81,8 +81,22 @@ babyRouter.post("/updateVisitNumber", (req, res) => __awaiter(void 0, void 0, vo
 }));
 babyRouter.post('/savePhoto', upload.single('image'), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        if (!req.body || typeof req.body !== "object" || Array.isArray(req.body)) {
-            res.status(400).json({ message: "body is required" });
+        const { mrn, category } = req.body;
+        const image = req.file;
+        if (!mrn) {
+            res.status(400).json({ message: "mrn is required" });
+            return;
+        }
+        if (!category) {
+            res.status(400).json({ message: "category is required" });
+            return;
+        }
+        if (category != "face" && category != "foot" && category != 'retina') {
+            res.status(400).json({ message: "category must be face or foot or retina" });
+            return;
+        }
+        if (!image) {
+            res.status(400).json({ message: "image is required" });
             return;
         }
         console.log(imagename);

@@ -27,4 +27,14 @@ imagesRouter.get('/babyImages/:imageName', (req, res) => {
         res.status(404).send('image is not found');
     }
 });
+imagesRouter.get('/motherImages/:imageName', (req, res) => {
+    try {
+        const { imageName } = req.params;
+        res.contentType('image/PNG');
+        res.sendFile(path_1.default.join(__dirname, '../../../motherPhotoes', imageName));
+    }
+    catch (err) {
+        res.status(404).send('image is not found');
+    }
+});
 exports.default = imagesRouter;
