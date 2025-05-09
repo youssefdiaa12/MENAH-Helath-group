@@ -58,7 +58,7 @@ export const getUnverifiedParents = async (page:number) :Promise<response|string
         }
         const adminModel = new AdminModel();
         const unverifiedUsersResponse = await adminModel.selectUnVerifiedParents(page)
-        if(unverifiedUsersResponse){         
+        if(typeof unverifiedUsersResponse != "string"){         
             return {
                 Status:true,
                 Data:unverifiedUsersResponse,
@@ -155,7 +155,7 @@ export const getBottleVerificationsSuccedd = async (page:number) :Promise<respon
         }
         const adminModel = new AdminModel();
         const response = await adminModel.getSuccessVerifications(page)
-        if(response){         
+        if(typeof response != "string"){         
             return {
                 Status:true,
                 Data:response,
@@ -184,7 +184,7 @@ export const getBottleVerificationsFailed = async (page:number) :Promise<respons
         }
         const adminModel = new AdminModel();
         const response = await adminModel.getFailedVerifications(page)
-        if(response){         
+        if(typeof response != "string"){         
             return {
                 Status:true,
                 Data:response,

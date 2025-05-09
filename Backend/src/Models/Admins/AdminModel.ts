@@ -40,7 +40,6 @@ export class AdminModel{
             const usersLength = "SELECT COUNT(*) FROM users WHERE isactive = false AND profiletype = 'nurse'";
             const getLength = await connection.query(usersLength);
             const total = parseInt(getLength.rows[0].count);
-            console.log(total)
             connection.release;
 
             if(users.rows.length == 0){
@@ -56,19 +55,25 @@ export class AdminModel{
             throw new Error(`admin retriving unverified nurses in admin models: ${err}`);
         }
     }
-    async selectUnVerifiedParents(page: number = 1): Promise<UserInfo[]|string>{
+    async selectUnVerifiedParents(page: number = 1): Promise<{ total: number, data: UserInfo[] } | string>{
         try{
             const PAGE_SIZE = 5;
             const offset = (page - 1) * PAGE_SIZE;
             const connection = await client.connect();
             const getUsers = "select (firstname || ' ' || lastname) name, username,mobile  from users where  isactive = false and profiletype = 'user' LIMIT $1 OFFSET $2"
             const users = await connection.query(getUsers, [PAGE_SIZE, offset]);
-            
+            const usersLength = "SELECT COUNT(*) FROM users WHERE isactive = false AND profiletype = 'nurse'";
+            const getLength = await connection.query(usersLength);
+            const total = parseInt(getLength.rows[0].count);
+
             if(users.rows.length == 0){
                 return "no unverified users found"
             }
             connection.release;
-            return users.rows
+            return {
+                total,
+                data: users.rows
+            };
 
         }
         catch(err){
@@ -117,38 +122,50 @@ export class AdminModel{
             throw new Error(`admin retriving unverified users in admin models: ${err}`);
         }
     }
-    async getSuccessVerifications(page: number = 1): Promise<UserInfo[]|string>{
+    async getSuccessVerifications(page: number = 1): Promise<{ total: number, data: UserInfo[] } | string>{
         try{
             const PAGE_SIZE = 5;
             const offset = (page - 1) * PAGE_SIZE;
             const connection = await client.connect();
             const getVerifications = "select * from verifications where status = 'completed' LIMIT $1 OFFSET $2"
             const verifications = await connection.query(getVerifications, [PAGE_SIZE, offset]);
-            
+            const usersLength = "select count(*) from verifications where status = 'completed'";
+            const getLength = await connection.query(usersLength);
+
+            const total = parseInt(getLength.rows[0].count);
             if(verifications.rows.length == 0){
                 return "Verifications are not found"
             }
             connection.release;
-            return verifications.rows
+            return {
+                total,
+                data: verifications.rows
+            };
 
         }
         catch(err){
             throw new Error(`admin verifications success retrival error in admin models: ${err}`);
         }
     }
-    async getFailedVerifications(page: number = 1): Promise<UserInfo[]|string>{
+    async getFailedVerifications(page: number = 1): Promise<{ total: number, data: UserInfo[] } | string>{
         try{
             const PAGE_SIZE = 5;
             const offset = (page - 1) * PAGE_SIZE;
             const connection = await client.connect();
             const getVerifications = "select * from verifications where status = 'failed' LIMIT $1 OFFSET $2"
             const verifications = await connection.query(getVerifications, [PAGE_SIZE, offset]);
-            
+            const usersLength = "select count(*) from verifications where status = 'failed'";
+            const getLength = await connection.query(usersLength);
+
+            const total = parseInt(getLength.rows[0].count);
             if(verifications.rows.length == 0){
                 return "Verifications are not found"
             }
             connection.release;
-            return verifications.rows
+            return {
+                total,
+                data: verifications.rows
+            };
 
         }
         catch(err){
@@ -156,19 +173,25 @@ export class AdminModel{
         }
     }
 
-    async getLoggingHistory(user_id:number,page: number = 1): Promise<history[]|string>{
+    async getLoggingHistory(user_id:number,page: number = 1):  Promise<{ total: number, data: history[] } | string>{
         try{
             const PAGE_SIZE = 5;
             const offset = (page - 1) * PAGE_SIZE;
             const connection = await client.connect();
             const getHistory = "select * from login_history where user_id = ($1) LIMIT $2 OFFSET $3"
             const history = await connection.query(getHistory, [user_id,PAGE_SIZE, offset]);
-            
+            const usersLength = "select count(*) from login_history where user_id = ($1)";
+            const getLength = await connection.query(usersLength,[user_id]);
+
+            const total = parseInt(getLength.rows[0].count);
             if(history.rows.length == 0){
                 return "History are not found"
             }
             connection.release;
-            return history.rows
+            return {
+                total,
+                data: history.rows
+            };
 
         }
         catch(err){

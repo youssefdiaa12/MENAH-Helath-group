@@ -37,7 +37,7 @@ const getUnverifiedNurses = (page) => __awaiter(void 0, void 0, void 0, function
     try {
         const adminModel = new AdminModel_1.AdminModel();
         const unverifiedUsersResponse = yield adminModel.selectUnVerifiedUsers(page);
-        if (unverifiedUsersResponse) {
+        if (typeof unverifiedUsersResponse != "string") {
             return {
                 Status: true,
                 Data: unverifiedUsersResponse,
@@ -66,7 +66,7 @@ const getUnverifiedParents = (page) => __awaiter(void 0, void 0, void 0, functio
         }
         const adminModel = new AdminModel_1.AdminModel();
         const unverifiedUsersResponse = yield adminModel.selectUnVerifiedParents(page);
-        if (unverifiedUsersResponse) {
+        if (typeof unverifiedUsersResponse != "string") {
             return {
                 Status: true,
                 Data: unverifiedUsersResponse,
@@ -74,7 +74,7 @@ const getUnverifiedParents = (page) => __awaiter(void 0, void 0, void 0, functio
             };
         }
         return {
-            Status: true,
+            Status: false,
             Data: null,
             Message: unverifiedUsersResponse
         };
