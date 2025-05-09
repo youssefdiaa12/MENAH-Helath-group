@@ -28,7 +28,39 @@ const upload = multer({ storage });
 // signing user in the system
 userRouter.post('/signup',upload.single('profileImage'),async (req:Request,res:Response) =>{
     try{
-        if(imageExtension != '.png' && imageExtension != '.jpg' && imageExtension != '.jpeg'){
+        const { username, firstname , lastname,mobile,password,profileType} = req.body;
+        const image = req.file;
+
+        if (!username ) {
+            res.status(400).json({ message: "username is required" });
+            return
+        }
+        if (!firstname ) {
+            res.status(400).json({ message: "firstname is required" });
+            return
+        }
+        if (!lastname ) {
+            res.status(400).json({ message: "lastname is required" });
+            return
+        }
+        if (!mobile ) {
+            res.status(400).json({ message: "mobile is required" });
+            return
+        }
+        if (!password ) {
+            res.status(400).json({ message: "password is required" });
+            return
+        }
+        if (!profileType ) {
+            res.status(400).json({ message: "profileType is required" });
+            return
+        } 
+        if (profileType!= "user" && profileType != "admin" && profileType != "nurse" ) {
+            res.status(400).json({ message: "profileType must be user or admin or nurse" });
+            return
+        }
+
+        if(imageExtension != '.png' && imageExtension != '.jpg' && imageExtension != '.jpeg' && image){
             res.status(400).json({ message: "Only .png, .jpg, and .jpeg formats are allowed" });   
             return 
         }

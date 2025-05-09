@@ -100,7 +100,7 @@ const VerifyUser = (username, mobile) => __awaiter(void 0, void 0, void 0, funct
         }
         const adminModel = new AdminModel_1.AdminModel();
         const response = yield adminModel.verifyUser(username, mobile);
-        if (response) {
+        if (typeof response != "string") {
             return {
                 Status: true,
                 Data: response,
@@ -134,7 +134,7 @@ const UnVerifyUser = (username, mobile) => __awaiter(void 0, void 0, void 0, fun
         }
         const adminModel = new AdminModel_1.AdminModel();
         const response = yield adminModel.DeclineUser(username, mobile);
-        if (response) {
+        if (typeof response != "string") {
             return {
                 Status: true,
                 Data: response,
