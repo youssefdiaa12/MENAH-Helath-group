@@ -7,7 +7,7 @@ import {response} from "../../Types/Response";
 
 
 
-export const getParentBabies = async (page:number,mother_mrn:string) :Promise<response|string> =>{
+export const getParentBabies = async (page:number,username:string) :Promise<response|string> =>{
     try{
         if(page == null || page ==undefined ){
             return {
@@ -23,23 +23,17 @@ export const getParentBabies = async (page:number,mother_mrn:string) :Promise<re
                 Message: "Page must be an integer."
             } 
         }
-        if (typeof mother_mrn !== 'string' || !mother_mrn.trim()) {
+        if (typeof username !== 'string' || !username.trim()) {
             return {
                 Status:false,
                 Data:null,
-                Message:  "mother mrn must be a non-empty string."
+                Message:  "username must be a non-empty string."
             }
         }
-        if(mother_mrn.length != 12){
-            return {
-                Status:false,
-                Data:null,
-                Message:  "mother mrn must be 12 characters"
-            }
-        }
+
         
         const parentModel = new ParentModel();
-        const allbabies = await parentModel.SelectBabies(mother_mrn,page)
+        const allbabies = await parentModel.SelectBabies(username,page)
         if(typeof allbabies != "string"){         
             return {
                 Status:true,
@@ -58,7 +52,7 @@ export const getParentBabies = async (page:number,mother_mrn:string) :Promise<re
     }
 }
 
-export const getParentEBM = async (page:number,mother_mrn:string) :Promise<response|string> =>{
+export const getParentEBM = async (page:number,username:string) :Promise<response|string> =>{
     try{
         if(page == null || page ==undefined ){
             return "page is required"
@@ -66,15 +60,13 @@ export const getParentEBM = async (page:number,mother_mrn:string) :Promise<respo
         if (!Number.isInteger(page)) {
             return("Page must be an integer.");
         }
-        if (typeof mother_mrn !== 'string' || !mother_mrn.trim()) {
-            return "mother mrn must be a non-empty string." ;
+        if (typeof username !== 'string' || !username.trim()) {
+            return "username must be a non-empty string." ;
         }
-        if(mother_mrn.length != 12){
-            return "mother mrn must be 12 characters"
-        }
+
         
         const parentModel = new ParentModel();
-        const allEBMS = await parentModel.SelectEBM(mother_mrn,page)
+        const allEBMS = await parentModel.SelectEBM(username,page)
         if(typeof allEBMS != "string"){         
             return {
                 Status:true,
@@ -93,17 +85,15 @@ export const getParentEBM = async (page:number,mother_mrn:string) :Promise<respo
     }
 }
 
-export const getCalculations= async (mother_mrn:string) :Promise<response|string> =>{
+export const getCalculations= async (username:string) :Promise<response|string> =>{
     try{
-        if (typeof mother_mrn !== 'string' || !mother_mrn.trim()) {
-            return "mother mrn must be a non-empty string." ;
+        if (typeof username !== 'string' || !username.trim()) {
+            return "username must be a non-empty string." ;
         }
-        if(mother_mrn.length != 12){
-            return "mother mrn must be 12 characters"
-        }
+
         
         const parentModel = new ParentModel();
-        const calc = await parentModel.Calculations(mother_mrn)
+        const calc = await parentModel.Calculations(username)
         if(typeof calc != "string"){         
             return {
                 Status:true,
@@ -123,20 +113,20 @@ export const getCalculations= async (mother_mrn:string) :Promise<response|string
 }
 
 
-export const getProfile = async (user_id:string) :Promise<response|string> =>{
+export const getProfile = async (username:string) :Promise<response|string> =>{
     try{
         
-        if (typeof user_id !== 'string' || !user_id.trim()) {
+        if (typeof username !== 'string' || !username.trim()) {
             return {
                 Status:false,
                 Data:null,
-                Message: "User id must be a non-empty string." 
+                Message: "username must be a non-empty string." 
             } 
         }
 
         
         const parentModel = new ParentModel();
-        const user = await parentModel.SelectUser(user_id)
+        const user = await parentModel.SelectUser(username)
         if(typeof user != "string"){         
             return {
                 Status:true,

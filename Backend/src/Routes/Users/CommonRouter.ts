@@ -14,7 +14,7 @@ HistoryRouter.post("/history", async (req: Request, res: Response) => {
         }
 
 
-        const response = await getHistory(req.body.user_id,req.body.page);
+        const response = await getHistory(req.body.username,req.body.page);
         res.json(response);
     } catch (error) {
         console.error(error);
@@ -30,7 +30,7 @@ HistoryRouter.post("/profile", async (req: Request, res: Response) => {
         }
 
 
-        const response = await getProfile(req.body.user_id);
+        const response = await getProfile(req.body.username);
         res.json(response);
     } catch (error) {
         console.error(error);

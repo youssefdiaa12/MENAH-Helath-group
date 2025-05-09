@@ -203,7 +203,7 @@ export const getBottleVerificationsFailed = async (page:number) :Promise<respons
 }
 
 
-export const getHistory = async (user_id:number,page:number) :Promise<response|string> =>{
+export const getHistory = async (username:string,page:number) :Promise<response|string> =>{
     try{
         if(page == null || page == 0 || typeof page == 'string'){
             return {
@@ -212,15 +212,17 @@ export const getHistory = async (user_id:number,page:number) :Promise<response|s
                 Message: "page Number is required"
             } 
         }
-        if(user_id==null || user_id==0){
+        if (typeof username !== 'string' || !username.trim()) {
             return {
-                Status:true,
+                Status:false,
                 Data:null,
-                Message: "user id is required"
-            }
+                Message: "username must be a non-empty string." 
+            } 
         }
+
+
         const adminModel = new AdminModel();
-        const response = await adminModel.getLoggingHistory(user_id,page)
+        const response = await adminModel.getLoggingHistory(username,page)
         if(typeof response != "string"){         
             return {
                 Status:true,

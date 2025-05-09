@@ -120,7 +120,7 @@ AdminRouter.post("/history", async (req: Request, res: Response) => {
         }
 
 
-        const response = await getHistory(req.body.user_id,req.body.page);
+        const response = await getHistory(req.body.username,req.body.page);
         res.json(response);
     } catch (error) {
         console.error(error);

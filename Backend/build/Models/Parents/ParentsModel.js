@@ -98,7 +98,7 @@ class ParentModel {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const connection = yield database_1.default.connect();
-                const SelectUserQuery = `select * from public.users where id=($1) `;
+                const SelectUserQuery = `select id,username,firstname,lastname,mobile,profileimage,profiletype,isactive from public.users where id=($1) `;
                 const user = yield connection.query(SelectUserQuery, [user_id]);
                 if (user.rows.length == 0) {
                     return "You have no account in the system";

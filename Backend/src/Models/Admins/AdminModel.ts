@@ -173,15 +173,22 @@ export class AdminModel{
         }
     }
 
-    async getLoggingHistory(user_id:number,page: number = 1):  Promise<{ total: number, data: history[] } | string>{
+    async getLoggingHistory(username:string,page: number = 1):  Promise<{ total: number, data: history[] } | string>{
         try{
             const PAGE_SIZE = 5;
             const offset = (page - 1) * PAGE_SIZE;
             const connection = await client.connect();
-            const getHistory = "select * from login_history where user_id = ($1) LIMIT $2 OFFSET $3"
-            const history = await connection.query(getHistory, [user_id,PAGE_SIZE, offset]);
-            const usersLength = "select count(*) from login_history where user_id = ($1)";
-            const getLength = await connection.query(usersLength,[user_id]);
+            const getHistory = `select login_history.id,login_history.login_date,login_history.login_time,
+            login_history.verification_result,login_history.user_id
+            from users
+            inner join login_history  on users.id = login_history.user_id
+            where users.username = ($1) LIMIT $2 OFFSET $3`
+            const history = await connection.query(getHistory, [username,PAGE_SIZE, offset]);
+            const usersLength = `select count(*)
+            from users
+            inner join login_history  on users.id = login_history.user_id
+            where users.username = ($1) `;
+            const getLength = await connection.query(usersLength,[username]);
 
             const total = parseInt(getLength.rows[0].count);
             if(history.rows.length == 0){

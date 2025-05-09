@@ -17,6 +17,10 @@ const MessageController_1 = require("../../Controllers/Messages/MessageControlle
 const MessageRouter = (0, express_1.default)();
 MessageRouter.post("/create", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        if (!req.body || typeof req.body !== "object" || Array.isArray(req.body)) {
+            res.status(400).json({ message: "body is required" });
+            return;
+        }
         const messData = req.body;
         const response = yield (0, MessageController_1.CreateMessage)(messData);
         res.json(response);
@@ -28,6 +32,10 @@ MessageRouter.post("/create", (req, res) => __awaiter(void 0, void 0, void 0, fu
 }));
 MessageRouter.post("/sent", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        if (!req.body || typeof req.body !== "object" || Array.isArray(req.body)) {
+            res.status(400).json({ message: "body is required" });
+            return;
+        }
         const id = req.body.id;
         const response = yield (0, MessageController_1.SelectMySentMessages)(id);
         res.json(response);
@@ -39,6 +47,10 @@ MessageRouter.post("/sent", (req, res) => __awaiter(void 0, void 0, void 0, func
 }));
 MessageRouter.post("/markAsRead", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        if (!req.body || typeof req.body !== "object" || Array.isArray(req.body)) {
+            res.status(400).json({ message: "body is required" });
+            return;
+        }
         const userId = req.body.userId;
         const messageId = req.body.id;
         const response = yield (0, MessageController_1.MarkAsRead)(userId, messageId);
@@ -51,6 +63,10 @@ MessageRouter.post("/markAsRead", (req, res) => __awaiter(void 0, void 0, void 0
 }));
 MessageRouter.post("/recievings", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        if (!req.body || typeof req.body !== "object" || Array.isArray(req.body)) {
+            res.status(400).json({ message: "body is required" });
+            return;
+        }
         const id = req.body.id;
         const response = yield (0, MessageController_1.SelectMyrecieverMessages)(id);
         res.json(response);

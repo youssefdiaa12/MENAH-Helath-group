@@ -126,7 +126,11 @@ exports.getCalculations = getCalculations;
 const getProfile = (user_id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         if (typeof user_id !== 'string' || !user_id.trim()) {
-            return "User id must be a non-empty string.";
+            return {
+                Status: false,
+                Data: null,
+                Message: "User id must be a non-empty string."
+            };
         }
         const parentModel = new ParentsModel_1.ParentModel();
         const user = yield parentModel.SelectUser(user_id);
