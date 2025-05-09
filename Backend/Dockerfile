@@ -15,6 +15,7 @@ COPY . .
 # Compile TypeScript
 RUN tsc
 
-EXPOSE 5000
+EXPOSE 8080
 
-CMD ["nodemon", "src/server.ts"]
+# Run migrations before starting the server
+CMD ["sh", "-c", "npx db-migrate up && nodemon src/server.ts"]
