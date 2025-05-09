@@ -6,6 +6,7 @@ import path from 'path';
 
 const motherRouter = express()
 let imagename:string = ''
+let imageExtension:string = ''
 // configuring multer to be able to recieve images in the request body
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -13,6 +14,7 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, cb) => {
         const ext = path.extname(file.originalname);
+        imageExtension=ext;
         const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1E9)}${ext}`;
         imagename = uniqueName
         cb(null, uniqueName);
@@ -59,6 +61,10 @@ motherRouter.post('/savePhoto',upload.single('image'),async (req:Request,res:Res
         if (!image) {
             res.status(400).json({ message: "image is required" });
             return
+        }
+        if(imageExtension != '.png' && imageExtension != '.jpg' && imageExtension != '.jpeg'){
+            res.status(400).json({ message: "Only .png, .jpg, and .jpeg formats are allowed" });   
+            return 
         }
         console.log(imagename)
         const response = await SaveMotherPhoto(req.body.mrn, `${process.env.MOTHERIMAGE}${imagename}`, req.body.category)

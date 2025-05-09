@@ -28,7 +28,7 @@ const hashThePass = (password) => {
 };
 const createToken = (userInfo) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const newtoken = jsonwebtoken_1.default.sign({ username: userInfo.username, firstname: userInfo.firstname, lastname: userInfo.lastname, role: userInfo.profiletype, isActive: userInfo.isactive }, process.env.TOKENSECRET);
+        const newtoken = jsonwebtoken_1.default.sign({ id: userInfo.id, username: userInfo.username, firstname: userInfo.firstname, lastname: userInfo.lastname, role: userInfo.profiletype, isActive: userInfo.isactive }, process.env.TOKENSECRET);
         return newtoken;
     }
     catch (err) {

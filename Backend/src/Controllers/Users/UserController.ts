@@ -21,7 +21,7 @@ const hashThePass = (password:string)=>{
 }
 const createToken = async(userInfo:user):Promise<string>=>{
     try{
-        const newtoken = jwt.sign({username:userInfo.username,firstname:userInfo.firstname, lastname:userInfo.lastname, role:userInfo.profiletype,isActive:userInfo.isactive},((process.env.TOKENSECRET as unknown) as string));
+        const newtoken = jwt.sign({id:userInfo.id,username:userInfo.username,firstname:userInfo.firstname, lastname:userInfo.lastname, role:userInfo.profiletype,isActive:userInfo.isactive},((process.env.TOKENSECRET as unknown) as string));
         return newtoken;
     }
     catch(err){
