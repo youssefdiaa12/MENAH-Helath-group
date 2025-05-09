@@ -74,7 +74,7 @@ const getUnverifiedParents = (page) => __awaiter(void 0, void 0, void 0, functio
             };
         }
         return {
-            Status: false,
+            Status: true,
             Data: null,
             Message: unverifiedUsersResponse
         };
@@ -163,7 +163,7 @@ const getBottleVerificationsSuccedd = (page) => __awaiter(void 0, void 0, void 0
         }
         const adminModel = new AdminModel_1.AdminModel();
         const response = yield adminModel.getSuccessVerifications(page);
-        if (response) {
+        if (typeof response != "string") {
             return {
                 Status: true,
                 Data: response,
@@ -192,7 +192,7 @@ const getBottleVerificationsFailed = (page) => __awaiter(void 0, void 0, void 0,
         }
         const adminModel = new AdminModel_1.AdminModel();
         const response = yield adminModel.getFailedVerifications(page);
-        if (response) {
+        if (typeof response != "string") {
             return {
                 Status: true,
                 Data: response,

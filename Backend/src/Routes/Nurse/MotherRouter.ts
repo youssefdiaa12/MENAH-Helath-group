@@ -41,12 +41,27 @@ motherRouter.post("/create", async (req: Request<{}, {}, motherinfo>, res: Respo
 
 motherRouter.post('/savePhoto',upload.single('image'),async (req:Request,res:Response) =>{
     try{
-        if(!req.body || typeof req.body !== "object" || Array.isArray(req.body)){
-            res.status(400).json({message: "body is required"})
-            return;
+        const { mrn, category } = req.body;
+        const image = req.file;
+
+        if (!mrn ) {
+            res.status(400).json({ message: "mrn is required" });
+            return
+        }
+        if (!category ) {
+            res.status(400).json({ message: "category is required" });
+            return
+        }
+        if(category != "ID" && category != "fingerPrint"){
+            res.status(400).json({ message: "category must be ID or fingerPrint" });
+            return
+        }
+        if (!image) {
+            res.status(400).json({ message: "image is required" });
+            return
         }
         console.log(imagename)
-        const response = await SaveMotherPhoto(req.body.mrn, `${process.env.BABYIMAGE}${imagename}`, req.body.category)
+        const response = await SaveMotherPhoto(req.body.mrn, `${process.env.MOTHERIMAGE}${imagename}`, req.body.category)
         res.json(response)
     }
     catch(error){
