@@ -92,7 +92,7 @@ export const VerifyUser = async (username:string,mobile:string) :Promise<respons
         }
         const adminModel = new AdminModel();
         const response = await adminModel.verifyUser(username,mobile)
-        if(response){         
+        if(typeof response != "string"){         
             return {
                 Status:true,
                 Data:response,
@@ -125,7 +125,7 @@ export const UnVerifyUser = async (username:string,mobile:string) :Promise<respo
         }
         const adminModel = new AdminModel();
         const response = await adminModel.DeclineUser(username,mobile)
-        if(response){         
+        if(typeof response != "string"){         
             return {
                 Status:true,
                 Data:response,

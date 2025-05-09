@@ -19,7 +19,10 @@ if (current_environment == environment){
         host:POSTGRES_HOST,
         database:POSTGRES_DB,
         user:POSTGRES_USER,
-        password:POSTGRES_PASSWORD
+        password:POSTGRES_PASSWORD,
+        max: 1000,
+        idleTimeoutMillis: 30000,
+        connectionTimeoutMillis:  3000
     });
 }
 else{
@@ -27,7 +30,10 @@ else{
         host:POSTGRES_HOST,
         database:POSTGRES_TESTING_DB,
         user:POSTGRES_USER,
-        password:POSTGRES_PASSWORD
+        password:POSTGRES_PASSWORD,
+        max: 1000,
+        idleTimeoutMillis: 30000,
+        connectionTimeoutMillis:  3000
     });
 }
 

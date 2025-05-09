@@ -18,6 +18,7 @@ const multer_1 = __importDefault(require("multer"));
 const path_1 = __importDefault(require("path"));
 const motherRouter = (0, express_1.default)();
 let imagename = '';
+let imageExtension = '';
 // configuring multer to be able to recieve images in the request body
 const storage = multer_1.default.diskStorage({
     destination: (req, file, cb) => {
@@ -25,6 +26,7 @@ const storage = multer_1.default.diskStorage({
     },
     filename: (req, file, cb) => {
         const ext = path_1.default.extname(file.originalname);
+        imageExtension = ext;
         const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1E9)}${ext}`;
         imagename = uniqueName;
         cb(null, uniqueName);
@@ -64,6 +66,10 @@ motherRouter.post('/savePhoto', upload.single('image'), (req, res) => __awaiter(
         }
         if (!image) {
             res.status(400).json({ message: "image is required" });
+            return;
+        }
+        if (imageExtension != '.png' && imageExtension != '.jpg' && imageExtension != '.jpeg') {
+            res.status(400).json({ message: "Only .png, .jpg, and .jpeg formats are allowed" });
             return;
         }
         console.log(imagename);
