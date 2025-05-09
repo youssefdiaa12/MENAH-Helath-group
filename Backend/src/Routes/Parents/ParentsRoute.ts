@@ -12,7 +12,7 @@ ParentRouter.post("/babies", async (req: Request, res: Response) => {
             res.status(400).json({message: "body is required"})
             return;
         }
-        const response = await getParentBabies(req.body.page,req.body.username);
+        const response = await getParentBabies(req.body.username);
         res.json(response);
     } catch (error) {
         console.error(error);

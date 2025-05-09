@@ -21,7 +21,7 @@ ParentRouter.post("/babies", (req, res) => __awaiter(void 0, void 0, void 0, fun
             res.status(400).json({ message: "body is required" });
             return;
         }
-        const response = yield (0, ParentsController_1.getParentBabies)(req.body.page, req.body.mother_mrn);
+        const response = yield (0, ParentsController_1.getParentBabies)(req.body.username);
         res.json(response);
     }
     catch (error) {
@@ -35,7 +35,7 @@ ParentRouter.post("/EBM", (req, res) => __awaiter(void 0, void 0, void 0, functi
             res.status(400).json({ message: "body is required" });
             return;
         }
-        const response = yield (0, ParentsController_1.getParentEBM)(req.body.page, req.body.mother_mrn);
+        const response = yield (0, ParentsController_1.getParentEBM)(req.body.page, req.body.username);
         res.json(response);
     }
     catch (error) {
@@ -49,7 +49,7 @@ ParentRouter.post("/calculations", (req, res) => __awaiter(void 0, void 0, void 
             res.status(400).json({ message: "body is required" });
             return;
         }
-        const response = yield (0, ParentsController_1.getCalculations)(req.body.mother_mrn);
+        const response = yield (0, ParentsController_1.getCalculations)(req.body.username);
         res.json(response);
     }
     catch (error) {

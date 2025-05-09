@@ -57,6 +57,11 @@ function validateBabyInfo(data) {
     if (isNaN(recordedAt.getTime())) {
         return { isValid: false, message: "Valid recorded_at date is required." };
     }
+    // Check if DOB is in the future
+    const now = new Date();
+    if (dob > now) {
+        return { isValid: false, message: "Date of birth cannot be in the future." };
+    }
     // mother_id can be null, but not undefined
     if (data.mother_id === undefined) {
         return { isValid: false, message: "Mother ID must be provided, even if null." };

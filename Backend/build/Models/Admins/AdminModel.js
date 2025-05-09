@@ -182,16 +182,23 @@ class AdminModel {
             }
         });
     }
-    getLoggingHistory(user_id_1) {
-        return __awaiter(this, arguments, void 0, function* (user_id, page = 1) {
+    getLoggingHistory(username_1) {
+        return __awaiter(this, arguments, void 0, function* (username, page = 1) {
             try {
                 const PAGE_SIZE = 5;
                 const offset = (page - 1) * PAGE_SIZE;
                 const connection = yield database_1.default.connect();
-                const getHistory = "select * from login_history where user_id = ($1) LIMIT $2 OFFSET $3";
-                const history = yield connection.query(getHistory, [user_id, PAGE_SIZE, offset]);
-                const usersLength = "select count(*) from login_history where user_id = ($1)";
-                const getLength = yield connection.query(usersLength, [user_id]);
+                const getHistory = `select login_history.id,login_history.login_date,login_history.login_time,
+            login_history.verification_result,login_history.user_id
+            from users
+            inner join login_history  on users.id = login_history.user_id
+            where users.username = ($1) LIMIT $2 OFFSET $3`;
+                const history = yield connection.query(getHistory, [username, PAGE_SIZE, offset]);
+                const usersLength = `select count(*)
+            from users
+            inner join login_history  on users.id = login_history.user_id
+            where users.username = ($1) `;
+                const getLength = yield connection.query(usersLength, [username]);
                 const total = parseInt(getLength.rows[0].count);
                 if (history.rows.length == 0) {
                     return "History are not found";

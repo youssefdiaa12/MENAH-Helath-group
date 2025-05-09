@@ -7,6 +7,7 @@ import path from 'path';
 
 const babyRouter = express()
 let imagename:string = ''
+let imageExtension:string = ''
 // configuring multer to be able to recieve images in the request body
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -14,6 +15,7 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, cb) => {
         const ext = path.extname(file.originalname);
+        imageExtension = ext;
         const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1E9)}${ext}`;
         imagename = uniqueName
         cb(null, uniqueName);
@@ -91,6 +93,10 @@ babyRouter.post('/savePhoto',upload.single('image'),async (req:Request,res:Respo
         if (!image) {
             res.status(400).json({ message: "image is required" });
             return
+        }
+        if(imageExtension != '.png' && imageExtension != '.jpg' && imageExtension != '.jpeg'){
+            res.status(400).json({ message: "Only .png, .jpg, and .jpeg formats are allowed" });   
+            return 
         }
         console.log(imagename)
         const response = await SaveBabyPhoto(req.body.mrn, `${process.env.BABYIMAGE}${imagename}`, req.body.category)

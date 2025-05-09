@@ -115,7 +115,7 @@ AdminRouter.post("/history", (req, res) => __awaiter(void 0, void 0, void 0, fun
             res.status(400).json({ message: "body is required" });
             return;
         }
-        const response = yield (0, AdminController_1.getHistory)(req.body.user_id, req.body.page);
+        const response = yield (0, AdminController_1.getHistory)(req.body.username, req.body.page);
         res.json(response);
     }
     catch (error) {

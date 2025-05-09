@@ -5,31 +5,21 @@ import {userInfo} from "../../Types/Users/UsersType"
 
 
 export class ParentModel{
-    async SelectBabies(username:string,page:number): Promise<{ total: number, data: BabyInfo[] } | string>{
+    async SelectBabies(username:string): Promise<BabyInfo[]  | string>{
         try{
-            const PAGE_SIZE = 5;
-            const offset = (page - 1) * PAGE_SIZE;
+
             const connection = await client.connect();
             const SelectBabyQuery = `select baby.name_en, baby.gender,baby.mrn,baby.date_of_birth,baby.days_of_life,
             baby.birth_weight, baby.gestationalage_days,baby.birth_certificate_id from public.baby baby
             inner join 	public.mother_info mother_info on baby.mother_id = mother_info.mother_mrn
             inner join public.users users on users.id = mother_info.user_id
-            where users.username=($1) LIMIT $2 OFFSET $3`;
-            const Baby = await connection.query(SelectBabyQuery,[username,PAGE_SIZE,offset]);
+            where users.username=($1)`;
+            const Baby = await connection.query(SelectBabyQuery,[username]);
             if(Baby.rows.length == 0){
                 return "You have no babies in the system";
             }
-            const usersLength = `select count(*) from public.baby baby
-            inner join 	public.mother_info mother_info on baby.mother_id = mother_info.mother_mrn
-            inner join public.users users on users.id = mother_info.user_id
-            where users.username=($1) `;
-            const getLength = await connection.query(usersLength,[username]);
+            return Baby.rows
 
-            const total = parseInt(getLength.rows[0].count);
-            return {
-                total,
-                data: Baby.rows
-            };
         }
         catch(error){
             throw new Error(`baby selection error in parent models: ${error}`);

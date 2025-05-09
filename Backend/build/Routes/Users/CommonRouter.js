@@ -22,7 +22,7 @@ HistoryRouter.post("/history", (req, res) => __awaiter(void 0, void 0, void 0, f
             res.status(400).json({ message: "body is required" });
             return;
         }
-        const response = yield (0, AdminController_1.getHistory)(req.body.user_id, req.body.page);
+        const response = yield (0, AdminController_1.getHistory)(req.body.username, req.body.page);
         res.json(response);
     }
     catch (error) {
@@ -36,7 +36,7 @@ HistoryRouter.post("/profile", (req, res) => __awaiter(void 0, void 0, void 0, f
             res.status(400).json({ message: "body is required" });
             return;
         }
-        const response = yield (0, ParentsController_1.getProfile)(req.body.user_id);
+        const response = yield (0, ParentsController_1.getProfile)(req.body.username);
         res.json(response);
     }
     catch (error) {

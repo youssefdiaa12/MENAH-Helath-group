@@ -210,7 +210,7 @@ const getBottleVerificationsFailed = (page) => __awaiter(void 0, void 0, void 0,
     }
 });
 exports.getBottleVerificationsFailed = getBottleVerificationsFailed;
-const getHistory = (user_id, page) => __awaiter(void 0, void 0, void 0, function* () {
+const getHistory = (username, page) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         if (page == null || page == 0 || typeof page == 'string') {
             return {
@@ -219,15 +219,15 @@ const getHistory = (user_id, page) => __awaiter(void 0, void 0, void 0, function
                 Message: "page Number is required"
             };
         }
-        if (user_id == null || user_id == 0) {
+        if (typeof username !== 'string' || !username.trim()) {
             return {
-                Status: true,
+                Status: false,
                 Data: null,
-                Message: "user id is required"
+                Message: "username must be a non-empty string."
             };
         }
         const adminModel = new AdminModel_1.AdminModel();
-        const response = yield adminModel.getLoggingHistory(user_id, page);
+        const response = yield adminModel.getLoggingHistory(username, page);
         if (typeof response != "string") {
             return {
                 Status: true,

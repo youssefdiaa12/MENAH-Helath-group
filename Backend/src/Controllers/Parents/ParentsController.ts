@@ -7,22 +7,9 @@ import {response} from "../../Types/Response";
 
 
 
-export const getParentBabies = async (page:number,username:string) :Promise<response|string> =>{
+export const getParentBabies = async (username:string) :Promise<response|string> =>{
     try{
-        if(page == null || page ==undefined ){
-            return {
-                Status:false,
-                Data:null,
-                Message: "page is required"
-            } 
-        }
-        if (!Number.isInteger(page)) {
-            return {
-                Status:false,
-                Data:null,
-                Message: "Page must be an integer."
-            } 
-        }
+
         if (typeof username !== 'string' || !username.trim()) {
             return {
                 Status:false,
@@ -33,7 +20,7 @@ export const getParentBabies = async (page:number,username:string) :Promise<resp
 
         
         const parentModel = new ParentModel();
-        const allbabies = await parentModel.SelectBabies(username,page)
+        const allbabies = await parentModel.SelectBabies(username)
         if(typeof allbabies != "string"){         
             return {
                 Status:true,
@@ -42,7 +29,7 @@ export const getParentBabies = async (page:number,username:string) :Promise<resp
             } 
         }
         return {
-            Status:false,
+            Status:true,
             Data:null,
             Message: allbabies
         } 
@@ -75,7 +62,7 @@ export const getParentEBM = async (page:number,username:string) :Promise<respons
             } 
         }
         return {
-            Status:false,
+            Status:true,
             Data:null,
             Message: allEBMS
         } 
@@ -102,7 +89,7 @@ export const getCalculations= async (username:string) :Promise<response|string> 
             } 
         }
         return {
-            Status:false,
+            Status:true,
             Data:null,
             Message: calc
         } 
@@ -135,7 +122,7 @@ export const getProfile = async (username:string) :Promise<response|string> =>{
             } 
         }
         return {
-            Status:false,
+            Status:true,
             Data:null,
             Message: user
         } 
