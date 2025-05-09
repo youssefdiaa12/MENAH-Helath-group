@@ -140,11 +140,17 @@ class AdminModel {
                 const connection = yield database_1.default.connect();
                 const getVerifications = "select * from verifications where status = 'completed' LIMIT $1 OFFSET $2";
                 const verifications = yield connection.query(getVerifications, [PAGE_SIZE, offset]);
+                const usersLength = "select count(*) from verifications where status = 'completed'";
+                const getLength = yield connection.query(usersLength);
+                const total = parseInt(getLength.rows[0].count);
                 if (verifications.rows.length == 0) {
                     return "Verifications are not found";
                 }
                 connection.release;
-                return verifications.rows;
+                return {
+                    total,
+                    data: verifications.rows
+                };
             }
             catch (err) {
                 throw new Error(`admin verifications success retrival error in admin models: ${err}`);
@@ -159,11 +165,17 @@ class AdminModel {
                 const connection = yield database_1.default.connect();
                 const getVerifications = "select * from verifications where status = 'failed' LIMIT $1 OFFSET $2";
                 const verifications = yield connection.query(getVerifications, [PAGE_SIZE, offset]);
+                const usersLength = "select count(*) from verifications where status = 'failed'";
+                const getLength = yield connection.query(usersLength);
+                const total = parseInt(getLength.rows[0].count);
                 if (verifications.rows.length == 0) {
                     return "Verifications are not found";
                 }
                 connection.release;
-                return verifications.rows;
+                return {
+                    total,
+                    data: verifications.rows
+                };
             }
             catch (err) {
                 throw new Error(`admin verifications failed retrival error in admin models: ${err}`);
@@ -178,11 +190,17 @@ class AdminModel {
                 const connection = yield database_1.default.connect();
                 const getHistory = "select * from login_history where user_id = ($1) LIMIT $2 OFFSET $3";
                 const history = yield connection.query(getHistory, [user_id, PAGE_SIZE, offset]);
+                const usersLength = "select count(*) from login_history where user_id = ($1)";
+                const getLength = yield connection.query(usersLength, [user_id]);
+                const total = parseInt(getLength.rows[0].count);
                 if (history.rows.length == 0) {
                     return "History are not found";
                 }
                 connection.release;
-                return history.rows;
+                return {
+                    total,
+                    data: history.rows
+                };
             }
             catch (err) {
                 throw new Error(`History retrival error in admin models: ${err}`);
