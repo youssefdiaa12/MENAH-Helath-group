@@ -1,6 +1,8 @@
 import client from "../../utilies/database";
 import {BabyInfo,parent_calculation} from "../../Types/Parents/ParentsType"
 import {ebmInfo} from "../../Types/Nurse/EBMType"
+import {userInfo} from "../../Types/Users/UsersType"
+
 
 export class ParentModel{
     async SelectBabies(mother_mrn:string,page:number): Promise<{ total: number, data: BabyInfo[] } | string>{
@@ -78,4 +80,20 @@ export class ParentModel{
             throw new Error(`calculations error in parent models: ${error}`);
         }
     }
+    async SelectUser(user_id:string): Promise<userInfo| string>{
+        try{
+            const connection = await client.connect();
+            const SelectUserQuery = `select id,username,firstname,lastname,mobile,profileimage,profiletype,isactive from public.users where id=($1) `;
+            const user = await connection.query(SelectUserQuery,[user_id]);
+            if(user.rows.length == 0){
+                return "You have no account in the system";
+            }
+
+            return user.rows[0]
+        }
+        catch(error){
+            throw new Error(`user profile error in parent models: ${error}`);
+        }
+    }
+
 }

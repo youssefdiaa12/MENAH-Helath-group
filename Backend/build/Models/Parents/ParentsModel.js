@@ -94,5 +94,21 @@ class ParentModel {
             }
         });
     }
+    SelectUser(user_id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const connection = yield database_1.default.connect();
+                const SelectUserQuery = `select * from public.users where id=($1) `;
+                const user = yield connection.query(SelectUserQuery, [user_id]);
+                if (user.rows.length == 0) {
+                    return "You have no account in the system";
+                }
+                return user.rows[0];
+            }
+            catch (error) {
+                throw new Error(`user profile error in parent models: ${error}`);
+            }
+        });
+    }
 }
 exports.ParentModel = ParentModel;

@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getCalculations = exports.getParentEBM = exports.getParentBabies = void 0;
+exports.getProfile = exports.getCalculations = exports.getParentEBM = exports.getParentBabies = void 0;
 const ParentsModel_1 = require("../../Models/Parents/ParentsModel");
 const getParentBabies = (page, mother_mrn) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -123,3 +123,28 @@ const getCalculations = (mother_mrn) => __awaiter(void 0, void 0, void 0, functi
     }
 });
 exports.getCalculations = getCalculations;
+const getProfile = (user_id) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        if (typeof user_id !== 'string' || !user_id.trim()) {
+            return "User id must be a non-empty string.";
+        }
+        const parentModel = new ParentsModel_1.ParentModel();
+        const user = yield parentModel.SelectUser(user_id);
+        if (typeof user != "string") {
+            return {
+                Status: true,
+                Data: user,
+                Message: "User Profile is retrieved Successfully"
+            };
+        }
+        return {
+            Status: false,
+            Data: null,
+            Message: user
+        };
+    }
+    catch (err) {
+        throw new Error(`error in retriving user info in parent contoller: ${err}`);
+    }
+});
+exports.getProfile = getProfile;

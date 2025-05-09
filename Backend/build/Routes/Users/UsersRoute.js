@@ -17,6 +17,7 @@ const multer_1 = __importDefault(require("multer"));
 const path_1 = __importDefault(require("path"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const UserController_1 = require("../../Controllers/Users/UserController");
+const Authentication_1 = require("../../MiddleWares/Authentication");
 dotenv_1.default.config();
 const userRouter = (0, express_1.default)();
 let imagename = '';
@@ -57,7 +58,7 @@ userRouter.post('/signin', (req, res) => __awaiter(void 0, void 0, void 0, funct
         throw new Error(`user loggin in error in user routes: ${error}`);
     }
 }));
-userRouter.post('/signout', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+userRouter.post('/signout', Authentication_1.validateMiddleWare, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         if (!req.body || typeof req.body !== "object" || Array.isArray(req.body)) {
             res.status(400).json({ message: "body is required" });
@@ -67,7 +68,7 @@ userRouter.post('/signout', (req, res) => __awaiter(void 0, void 0, void 0, func
         res.json(response);
     }
     catch (error) {
-        throw new Error(`user loggin in error in user routes: ${error}`);
+        throw new Error(`user loggin out error in user routes: ${error}`);
     }
 }));
 exports.default = userRouter;

@@ -121,3 +121,36 @@ export const getCalculations= async (mother_mrn:string) :Promise<response|string
         throw new Error(`error in calculating mother statistics in parent contoller: ${err}`);
     }
 }
+
+
+export const getProfile = async (user_id:string) :Promise<response|string> =>{
+    try{
+        
+        if (typeof user_id !== 'string' || !user_id.trim()) {
+            return {
+                Status:false,
+                Data:null,
+                Message: "User id must be a non-empty string." 
+            } 
+        }
+
+        
+        const parentModel = new ParentModel();
+        const user = await parentModel.SelectUser(user_id)
+        if(typeof user != "string"){         
+            return {
+                Status:true,
+                Data:user,
+                Message: "User Profile is retrieved Successfully"
+            } 
+        }
+        return {
+            Status:false,
+            Data:null,
+            Message: user
+        } 
+    }
+    catch(err){
+        throw new Error(`error in retriving user info in parent contoller: ${err}`);
+    }
+}

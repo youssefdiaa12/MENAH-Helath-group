@@ -3,7 +3,7 @@ import multer from 'multer';
 import path from 'path';
 import dotenv from 'dotenv'
 import {createUser,LogginUserIn,LoggUserout} from "../../Controllers/Users/UserController"
-
+import {validateMiddleWare} from "../../MiddleWares/Authentication"
 dotenv.config()
 const userRouter = express()
 
@@ -50,7 +50,7 @@ userRouter.post('/signin',async (req:Request,res:Response) =>{
     }
 });
 
-userRouter.post('/signout',async (req:Request,res:Response) =>{
+userRouter.post('/signout',validateMiddleWare,async (req:Request,res:Response) =>{
     try{
         if(!req.body || typeof req.body !== "object" || Array.isArray(req.body)){
             res.status(400).json({message: "body is required"})
@@ -60,7 +60,7 @@ userRouter.post('/signout',async (req:Request,res:Response) =>{
         res.json(response)
     }
     catch(error){
-        throw new Error(`user loggin in error in user routes: ${error}`);
+        throw new Error(`user loggin out error in user routes: ${error}`);
     }
 });
 

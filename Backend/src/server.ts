@@ -7,6 +7,7 @@ import {IsAdminValidation} from "./MiddleWares/isAdmin"
 import {IsNurseValidation} from "./MiddleWares/isNurse"
 import {IsParentValidation} from "./MiddleWares/isParent"
 import motherRouter from "./Routes/Nurse/MotherRouter"
+import HistoryRouter from "./Routes/Users/CommonRouter"
 import EBMRouter from "./Routes/Nurse/EBMRoute"
 import MessageRouter from "./Routes/Messages/MessagesRoute"
 import AdminRouter from "./Routes/Admins/AdminRoute"
@@ -30,6 +31,7 @@ app.use("/message",validateMiddleWare,MessageRouter)
 app.use("/admin",validateMiddleWare,IsAdminValidation,AdminRouter)
 app.use("/mother",validateMiddleWare,IsNurseValidation ,motherRouter)
 app.use("/parent",validateMiddleWare,IsParentValidation,ParentRouter)
+app.use("/all",validateMiddleWare,HistoryRouter)
 app.listen(port,()=>{
     console.log(`server started at http://localhost:${port}`)
 });
