@@ -9,8 +9,17 @@ export class userModel{
             const selectUsersQuery = 'select username from public.users where username=($1) or mobile=($2)';
             const alreadyRegisterdUsers = await connection.query(selectUsersQuery, [username,mobile]);
             if(typeof alreadyRegisterdUsers.rows[0] === 'undefined'){
-                const createUsersQuery = 'insert into public.users (username, firstname, lastname,mobile,profileImage,password,profileType) values($1,$2,$3,$4,$5,$6,$7) RETURNING *';
-                const registeringUser = await connection.query(createUsersQuery,[username,firstname,lastname,mobile,profileImage,password,profileType]);
+                let createUsersQuery;
+                let registeringUser;
+                if(profileType == "admin"){
+                    createUsersQuery= 'insert into public.users (username, firstname, lastname,mobile,profileImage,password,profileType,isactive) values($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *';
+                    registeringUser = await connection.query(createUsersQuery,[username,firstname,lastname,mobile,profileImage,password,profileType,true]);
+
+                }
+                else{
+                    createUsersQuery= 'insert into public.users (username, firstname, lastname,mobile,profileImage,password,profileType) values($1,$2,$3,$4,$5,$6,$7) RETURNING *';
+                    registeringUser = await connection.query(createUsersQuery,[username,firstname,lastname,mobile,profileImage,password,profileType]);
+                }
                 connection.release;
                 return registeringUser.rows[0]
             }
