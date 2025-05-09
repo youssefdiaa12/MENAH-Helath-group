@@ -1,23 +1,93 @@
-import { useState } from "react";
+"use client";
+
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const BabyProfile = () => {
   // State to track which sections are expanded
   const [expandedSections, setExpandedSections] = useState({
-    parents: false,
-    babies: false,
-    verificationHistory: false,
-    pendingVerifications: false,
     loginHistory: false,
   });
 
-  // State to track current page for each section
+  // State to track current page for login history
   const [currentPage, setCurrentPage] = useState({
-    parents: 1,
-    babies: 1,
-    verificationHistory: 1,
-    pendingVerifications: 1,
     loginHistory: 1,
   });
+
+  // State for user profile and login history
+  const [userProfile, setUserProfile] = useState(null);
+  const [loginHistory, setLoginHistory] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch user profile
+  const fetchUserProfile = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        "http://localhost:8080/all/profile",
+        {
+          username: JSON.parse(atob(token.split(".")[1])).username,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.data.Status) {
+        setUserProfile(response.data.Data);
+      } else {
+        setError(response.data.Message);
+      }
+    } catch (err) {
+      setError("Failed to fetch user profile");
+      console.error("Error fetching profile:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Fetch login history
+  const fetchLoginHistory = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        "http://localhost:8080/all/history",
+        {
+          page: currentPage.loginHistory,
+          username: JSON.parse(atob(token.split(".")[1])).username,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.data.Status) {
+        setLoginHistory(response.data.Data.data);
+      } else {
+        setError(response.data.Message);
+      }
+    } catch (err) {
+      setError("Failed to fetch login history");
+      console.error("Error fetching history:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserProfile();
+  }, []);
+
+  useEffect(() => {
+    if (expandedSections.loginHistory) {
+      fetchLoginHistory();
+    }
+  }, [currentPage.loginHistory, expandedSections.loginHistory]);
 
   // Toggle section expansion
   const toggleSection = (section) => {
@@ -35,173 +105,133 @@ const BabyProfile = () => {
     });
   };
 
-  return (
-    <div className=" space-y-4 p-4">
-      {/* Profile Information Card */}
-      <div className="bg-white rounded-lg border p-6">
-        <div className="flex items-center mb-6">
-          <div>
-            <h2 className="font-semibold text-lg">Sara Ahmed</h2>
-            <p className="text-gray-500 text-sm">Active</p>
-          </div>
-        </div>
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
 
-        <div className="grid grid-cols-2 gap-6">
-          <div className="space-y-1">
-            <p className="text-sm text-gray-500">First Name</p>
-            <div className="flex justify-between border p-2 rounded-md">
-              <p>Sara</p>
-              <button className="text-gray-400">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-
-          <div className="space-y-1">
-            <p className="text-sm text-gray-500">Last Name</p>
-            <div className="flex justify-between border p-2 rounded-md">
-              <p>Ahmed</p>
-              <button className="text-gray-400">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-
-          <div className="space-y-1">
-            <p className="text-sm text-gray-500">Username</p>
-            <div className="flex justify-between border p-2 rounded-md">
-              <p>sara.ahmed</p>
-              <button className="text-gray-400">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-
-          <div className="space-y-1">
-            <p className="text-sm text-gray-500">Password</p>
-            <div className="flex justify-between border p-2 rounded-md">
-              <p>••••••••</p>
-              <button className="text-gray-400">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-
-          <div className="space-y-1">
-            <p className="text-sm text-gray-500">Phone</p>
-            <div className="flex justify-between border p-2 rounded-md">
-              <p>+20123456789</p>
-              <button className="text-gray-400">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-
-          <div className="space-y-1">
-            <p className="text-sm text-gray-500">Email</p>
-            <div className="flex justify-between border p-2 rounded-md">
-              <p>saraahmed75@gmail.com</p>
-              <button className="text-gray-400">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-
-          <div className="space-y-1 col-span-2">
-            <p className="text-sm text-gray-500">Address</p>
-            <div className="flex justify-between border p-2 rounded-md">
-              <p>123 Medical St., Cairo, Egypt</p>
-              <button className="text-gray-400">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
-                </svg>
-              </button>
-            </div>
-          </div>
+  if (error) {
+    return (
+      <div className="p-4">
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+          {error}
         </div>
       </div>
+    );
+  }
+
+  return (
+    <div className="space-y-4 p-4">
+      {/* Profile Information Card */}
+      {userProfile && (
+        <div className="bg-white rounded-lg border p-6">
+          <div className="flex items-center mb-6">
+            <div>
+              <h2 className="font-semibold text-lg">{`${userProfile.firstname} ${userProfile.lastname}`}</h2>
+              <p
+                className={`text-sm ${
+                  userProfile.isactive ? "text-green-500" : "text-red-500"
+                }`}
+              >
+                {userProfile.isactive ? "Active" : "Inactive"}
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-6">
+            <div className="space-y-1">
+              <p className="text-sm text-gray-500">First Name</p>
+              <div className="flex justify-between border p-2 rounded-md">
+                <p>{userProfile.firstname}</p>
+                <button className="text-gray-400">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div className="space-y-1">
+              <p className="text-sm text-gray-500">Last Name</p>
+              <div className="flex justify-between border p-2 rounded-md">
+                <p>{userProfile.lastname}</p>
+                <button className="text-gray-400">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div className="space-y-1">
+              <p className="text-sm text-gray-500">Username</p>
+              <div className="flex justify-between border p-2 rounded-md">
+                <p>{userProfile.username}</p>
+                <button className="text-gray-400">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div className="space-y-1">
+              <p className="text-sm text-gray-500">Phone</p>
+              <div className="flex justify-between border p-2 rounded-md">
+                <p>{userProfile.mobile}</p>
+                <button className="text-gray-400">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Login History Section */}
       <div className="bg-white rounded-lg border overflow-hidden">
@@ -243,44 +273,24 @@ const BabyProfile = () => {
                 <thead className="bg-blue-500 text-white">
                   <tr>
                     <th className="py-2 px-4 text-left">Session</th>
-                    <th className="py-2 px-4 text-left">Date/Time</th>
+                    <th className="py-2 px-4 text-left">Date</th>
+                    <th className="py-2 px-4 text-left">Time</th>
                     <th className="py-2 px-4 text-left">Status</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {currentPage.loginHistory === 1 && (
-                    <>
-                      <tr className="border-b border-blue-100">
-                        <td className="py-2 px-4">Session 5</td>
-                        <td className="py-2 px-4">30-04-2023 09:30 AM</td>
-                        <td className="py-2 px-4 text-green-600">Active</td>
-                      </tr>
-                      <tr className="border-b border-blue-100">
-                        <td className="py-2 px-4">Session 4</td>
-                        <td className="py-2 px-4">29-04-2023 02:15 PM</td>
-                        <td className="py-2 px-4 text-red-600">Closed</td>
-                      </tr>
-                      <tr className="border-b border-blue-100">
-                        <td className="py-2 px-4">Session 3</td>
-                        <td className="py-2 px-4">28-04-2023 10:45 AM</td>
-                        <td className="py-2 px-4 text-red-600">Closed</td>
-                      </tr>
-                    </>
-                  )}
-                  {currentPage.loginHistory === 2 && (
-                    <>
-                      <tr className="border-b border-blue-100">
-                        <td className="py-2 px-4">Session 2</td>
-                        <td className="py-2 px-4">27-04-2023 03:20 PM</td>
-                        <td className="py-2 px-4 text-red-600">Closed</td>
-                      </tr>
-                      <tr>
-                        <td className="py-2 px-4">Session 1</td>
-                        <td className="py-2 px-4">26-04-2023 08:10 AM</td>
-                        <td className="py-2 px-4 text-red-600">Closed</td>
-                      </tr>
-                    </>
-                  )}
+                  {loginHistory.map((session) => (
+                    <tr key={session.id} className="border-b border-blue-100">
+                      <td className="py-2 px-4">Session {session.id}</td>
+                      <td className="py-2 px-4">
+                        {new Date(session.login_date).toLocaleDateString()}
+                      </td>
+                      <td className="py-2 px-4">{session.login_time}</td>
+                      <td className="py-2 px-4 text-green-600">
+                        {session.verification_result}
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -304,16 +314,6 @@ const BabyProfile = () => {
                 onClick={() => handlePageChange("loginHistory", 2)}
               >
                 2
-              </button>
-              <button
-                className={`w-8 h-8 rounded-full ${
-                  currentPage.loginHistory === 3
-                    ? "bg-blue-100"
-                    : "bg-white border"
-                } flex items-center justify-center`}
-                onClick={() => handlePageChange("loginHistory", 3)}
-              >
-                3
               </button>
             </div>
           </div>
