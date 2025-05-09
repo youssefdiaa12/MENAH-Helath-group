@@ -6,7 +6,6 @@ export class BabayModel{
         try{
             const connection = await client.connect();
             const SelectBabyQuery = 'select personal_id from public.baby where personal_id=($1) or mrn=($2)';
-            console.log(SelectBabyQuery)
             const alreadyRegisterdBaby = await connection.query(SelectBabyQuery, [babyData.personal_id,babyData.mrn]);
             if(typeof alreadyRegisterdBaby.rows[0] === 'undefined'){
                 const check_mother = "select * from public.mother_info where user_id=($1)"
@@ -37,7 +36,7 @@ export class BabayModel{
                 return BabyCreation.rows[0]
             }
             else{    
-                return "baby is already registered in the system";
+                return "MRN or Personal Id already exists";
             }
         }
         catch(error){
