@@ -13,7 +13,7 @@ services:
       - "5432:5432"
 
   backend:
-    build: 
+    build:
       context: ./Backend
       dockerfile: Dockerfile
     environment:
@@ -22,7 +22,7 @@ services:
       DB_PASS: mohamed123
       DB_NAME: MENAH
     ports:
-      - "5000:5000"
+      - "8080:8080"
     depends_on:
       - postgres
 
