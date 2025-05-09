@@ -48,11 +48,18 @@ class AdminModel {
                 const connection = yield database_1.default.connect();
                 const getUsers = "select (firstname || ' ' || lastname) name, username,mobile  from users where  isactive = false and profiletype = 'nurse' LIMIT $1 OFFSET $2";
                 const users = yield connection.query(getUsers, [PAGE_SIZE, offset]);
+                const usersLength = "SELECT COUNT(*) FROM users WHERE isactive = false AND profiletype = 'nurse'";
+                const getLength = yield connection.query(usersLength);
+                const total = parseInt(getLength.rows[0].count);
+                console.log(total);
+                connection.release;
                 if (users.rows.length == 0) {
                     return "no unverified nurses found";
                 }
-                connection.release;
-                return users.rows;
+                return {
+                    total,
+                    data: users.rows
+                };
             }
             catch (err) {
                 throw new Error(`admin retriving unverified nurses in admin models: ${err}`);

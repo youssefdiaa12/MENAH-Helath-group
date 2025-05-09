@@ -20,6 +20,7 @@ export type userInfo = {
     profileimage : string,
     profiletype : string,
     token?:string,
-    isactive :boolean
+    isactive :boolean,
+    length?: number
 }
 

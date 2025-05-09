@@ -29,7 +29,7 @@ export const getUnverifiedNurses = async (page:number) :Promise<response|string>
     try{
         const adminModel = new AdminModel();
         const unverifiedUsersResponse = await adminModel.selectUnVerifiedUsers(page)
-        if(unverifiedUsersResponse){         
+        if(typeof unverifiedUsersResponse != "string"){         
             return {
                 Status:true,
                 Data:unverifiedUsersResponse,

@@ -25,8 +25,8 @@ class userModel {
                     let createUsersQuery;
                     let registeringUser;
                     if (profileType == "admin") {
-                        createUsersQuery = 'insert into public.users (username, firstname, lastname,mobile,profileImage,password,profileType) values($1,$2,$3,$4,$5,$6,$7) RETURNING *';
-                        registeringUser = yield connection.query(createUsersQuery, [username, firstname, lastname, mobile, profileImage, password, true]);
+                        createUsersQuery = 'insert into public.users (username, firstname, lastname,mobile,profileImage,password,profileType,isactive) values($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *';
+                        registeringUser = yield connection.query(createUsersQuery, [username, firstname, lastname, mobile, profileImage, password, profileType, true]);
                     }
                     else {
                         createUsersQuery = 'insert into public.users (username, firstname, lastname,mobile,profileImage,password,profileType) values($1,$2,$3,$4,$5,$6,$7) RETURNING *';
