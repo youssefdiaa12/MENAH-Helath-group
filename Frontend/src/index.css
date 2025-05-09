@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&family=Abel&display=swap");
+
+.custom-shadow {
+  border-radius: 0.5em 0.6em / 0.6em 1em 3em 1em; /* Custom border radius */
+  box-shadow: 3px 0 0 0 #e7eeef, 3px 3px 0 0 #e7eeef, 0 3px 0 0 #e7eeef; /* Custom box shadow */
+}
+.custom-shadow:hover {
+  box-shadow: 3px 0 0 0 #96e0ff, 3px 3px 0 0 #96e0ff, 0 3px 0 0 #96e0ff; /* Custom box shadow */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
